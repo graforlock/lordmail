@@ -7,13 +7,17 @@ import Intent from '../actions/default-action';
 const subject = new ReplaySubject(1);
 
 let state = {
-  counter: 0
+  counter: 0,
+  list: [],
+  filterEvens: true
 };
 
 const defaultAction = () => {
   state = update(state, {
     $merge: {
-      counter: state.counter + 1
+      counter: state.counter + 1,
+      list: state.list.concat(state.counter),
+      filterEvens: !state.filterEvens
     }
   });
   subject.onNext(state);
