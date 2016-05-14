@@ -1,23 +1,24 @@
 import React from 'react';
-import Rx from 'rx';
-import Model from './model';
+import model from './model';
 import Root from './views/root';
 import ReactDOM from 'react-dom';
 
-const AppObservable = Rx.Observable.combineLatest(
- Model.subject,
-  function (
-    model
-  ) {
-    return {
-      model 
-     };
-  }
-);
+// const AppObservable = Rx.Observable.combineLatest(
+//  Model.subject,
+//   function (
+//     model
+//   ) {
+//     return {
+//       model 
+//      };
+//   }
+// );
 
-Model.subject.subscribe((appState) => {
+model.onValue((appState) => {
   ReactDOM.render(
-    <Root {...appState}/>,
+    <Root {...appState} />,
     document.getElementById('app')
   );
 });
+
+model.offValue();

@@ -1,40 +1,31 @@
-import { ReplaySubject } from 'rx';
-
-import update from 'react/lib/update';
+import Intents from '../actions/default-action';
+import Kefir from 'kefir';
+import pool from '../actions/pool';
 import actions from '../actions';
-import Intent from '../actions/default-action';
 
-const subject = new ReplaySubject(1);
+const model = Kefir.pool();
 
-let state = {
-  counter: 0,
-  list: [],
-  filterEvens: true
+let _state = {
+    counter: 0
 };
 
+let state$ = Kefir.stream(emitter => emitter.emit(_state));
+
+model.plug(state$);
+
 const defaultAction = () => {
-  state = update(state, {
-    $merge: {
-      counter: state.counter + 1,
-      list: state.list.concat(state.counter),
-      filterEvens: !state.filterEvens
-    }
-  });
-  subject.onNext(state);
+   state$ = Kefir.stream(emitter => emitter.emit({
+     counter: ++_state.counter
+   }));
+   model.plug(state$);
 }
 
-Intent.subject.subscribe(function (payload) {
-  switch(payload.key) {
+pool.onValue(x => {
+  switch(x) {
     case actions.DEFAULT_ACTION:
       defaultAction();
       break;
-    default:
-      console.warn(`${payload.key} not recognized in model.`);
   }
 });
 
-subject.onNext(state);
-
-export default {
-  subject: subject
-};
+export default model;

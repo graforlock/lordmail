@@ -1,14 +1,12 @@
-import { ReplaySubject } from 'rx';
+import Kefir from 'kefir';
 import actions from './index';
-import { flukt } from '../utils';
+import pool from './pool';
 
-const intentSubject = new ReplaySubject(1);
-
-export default {
-  subject: intentSubject,
-  defaultAction: function () {
-    intentSubject.onNext({
-      key: actions.DEFAULT_ACTION
-    });
+export default  {
+  defaultAction: function(event) {
+    pool.plug(
+      Kefir.stream(emitter => emitter.emit(actions.DEFAULT_ACTION))
+        .merge(Kefir.stream(emitter => emitter.emit(event)))
+    );
   }
-};
+} 

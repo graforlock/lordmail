@@ -1,4 +1,3 @@
-import { ReplaySubject } from 'rx';
 import actions from '../actions';
 
 export const mirror = (obj) => {
