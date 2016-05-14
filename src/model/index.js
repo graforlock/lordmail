@@ -1,6 +1,5 @@
 import { ReplaySubject } from 'rx';
 
-import update from 'react/lib/update';
 import actions from '../actions';
 import Intent from '../actions/default-action';
 
@@ -13,20 +12,25 @@ let state = {
 };
 
 const defaultAction = () => {
-  state = update(state, {
-    $merge: {
-      counter: state.counter + 1,
-      list: state.list.concat(state.counter),
-      filterEvens: !state.filterEvens
-    }
+  state = Object.assign({}, {
+    counter: state.counter + 1,
+    list: state.list.concat(state.counter),
+    filterEvens: !state.filterEvens
   });
   subject.onNext(state);
+}
+
+const addAction = () => {
+  alert('add');
 }
 
 Intent.subject.subscribe(function (payload) {
   switch(payload.key) {
     case actions.DEFAULT_ACTION:
       defaultAction();
+      break;
+    case actions.ADD_ACTION:
+      addAction();
       break;
     default:
       console.warn(`${payload.key} not recognized in model.`);

@@ -10,6 +10,7 @@ const Root = props => {
     return (
         <div><h1>Hey Ho {props.counter}</h1>
         <button onClick={action.defaultAction}>click me</button>
+        <button onClick={action.addAction}>add action</button>
         { history }
         </div>  
     );
