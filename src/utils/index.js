@@ -34,15 +34,12 @@ export const ajax$ = (options) => {
         XHR.then(emitter.emit);
         XHR.catch(function (response) {
             if (response instanceof Error) {
-            // Something happened in setting up the request that triggered an Error
-            console.log('Error', response.message);
+                console.log('Error', response.message);
             } else {
-            // The request was made, but the server responded with a status code
-            // that falls out of the range of 2xx
-            console.log(response.data);
-            console.log(response.status);
-            console.log(response.headers);
-            console.log(response.config);
+                console.log(response.data);
+                console.log(response.status);
+                console.log(response.headers);
+                console.log(response.config);
             }
         });
     }).take(1).takeErrors(1).toProperty();
