@@ -8,6 +8,7 @@ const Root = props => {
         <div><h1>Hey Ho {props.counter}</h1>
             <button onClick={Intents.defaultAction}>click me</button>
             <button onClick={IntentsTwo.testAction}>click me too</button>
+            <p>{props.name}</p>
         </div>  
     );
 }
