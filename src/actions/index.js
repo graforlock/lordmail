@@ -1,4 +1,4 @@
-import { mirror } from '../utils';
+import { mirror } from '../utils/index';
 /*
     Action Index.
     -------------

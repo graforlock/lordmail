@@ -1,4 +1,4 @@
-import actions from '../actions';
+import actions from '../actions/index';
 
 export const mirror = (obj) => {
     let o = {};

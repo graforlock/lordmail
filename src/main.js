@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import model from './model';
+import model from './model/index';
 import test from './model/test';
 import Root from './views/root';
 
@@ -16,4 +16,3 @@ model$$.onValue((appState) => {
   );
 });
 
-model.offValue();
