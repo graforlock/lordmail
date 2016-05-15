@@ -1,4 +1,4 @@
-## Flukt 
+## FLUFFSTER 
 
 ### TODO
 - <s>Option to centralize the model/store structure (alter Flux methodology)
