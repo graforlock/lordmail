@@ -14,8 +14,9 @@ let state$ = Kefir.stream(emitter => emitter.emit(_state));
 model.plug(state$);
 
 const testAction = () => {
+   _state.name = _state.name.concat(_state.name);
    state$ = Kefir.stream(emitter => emitter.emit({
-     name: 'Aaron Chase'
+     name: _state.name
    }));
    model.plug(state$);
 }
