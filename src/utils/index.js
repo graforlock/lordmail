@@ -1,4 +1,5 @@
 import actions from '../actions/index';
+import Kefir from 'kefir';
 
 export const mirror = (obj) => {
     let o = {};
@@ -7,3 +8,7 @@ export const mirror = (obj) => {
     });
     return o;
 }
+
+export const emitState = (state) => {
+    return Kefir.stream(emitter => emitter.emit(state));
+};

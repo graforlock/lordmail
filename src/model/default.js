@@ -2,30 +2,30 @@ import Intents from '../actions/default-action';
 import Kefir from 'kefir';
 import pool from '../actions/pool';
 import actions from '../actions/index';
+
 import {emitState} from '../utils/index';
 
 const model = Kefir.pool();
 
 let _state = {
-    name: 'Aaron Chase'
+    counter: 0
 };
 
 let state$ = emitState(_state);
 
 model.plug(state$);
 
-const testAction = () => {
-   _state.name = _state.name.concat(_state.name);
+const defaultAction = () => {
    state$ = emitState({
-     name: _state.name
+     counter: ++_state.counter
    });
    model.plug(state$);
 }
 
 pool.onValue(x => {
   switch(x) {
-    case actions.TEST_ACTION:
-      testAction();
+    case actions.DEFAULT_ACTION:
+      defaultAction();
       break;
   }
 });
