@@ -13,6 +13,7 @@ export const mirror = (obj) => {
 export const emit = (state) => {
     return Kefir.stream(emitter => emitter.emit(state));
 };
+export const emitState = emit;
 
 export const registerIntent = (intentType, payload) => {
 
@@ -22,7 +23,6 @@ export const registerIntent = (intentType, payload) => {
                 payload
             ],
             (type, payload) => {
-                console.log("here");
                 return {type, payload}
             }
     );

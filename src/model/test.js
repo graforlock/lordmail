@@ -2,7 +2,7 @@ import Intents from '../actions/default-action';
 import Kefir from 'kefir';
 import pool from '../actions/pool';
 import actions from '../actions/index';
-import {emit} from '../utils/index';
+import {emitState} from '../utils/index';
 
 const model = Kefir.pool();
 
@@ -11,20 +11,19 @@ let _state = {
     data: null
 };
 
-let state$ = emit(_state);
+let state$ = emitState(_state);
 
 model.plug(state$);
 
 const testAction = () => {
    _state.name = _state.name.concat(_state.name);
-   state$ = emit(_state);
+   state$ = emitState(_state);
    model.plug(state$);
 }
 
-
 const promiseAction = (x) => {
    _state.data = x;
-   state$ = emit(_state);
+   state$ = emitState(_state);
    model.plug(state$);
 }
 
