@@ -23,9 +23,7 @@
     "babel-preset-react": "^6.5.0",
     "babel-preset-stage-1": "^6.5.0",
     "jspm": "^0.16.34",
-    "react-addons-test-utils": "^15.0.2",
-    "webpack": "^1.13.0",
-    "webpack-dev-server": "^1.14.1"
+    "react-addons-test-utils": "^15.0.2"
   },
   "jspm": {
     "dependencies": {
