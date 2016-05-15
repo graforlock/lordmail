@@ -30,9 +30,9 @@ export const registerIntent = (intentType, payload) => {
 
 export const ajax$ = (options) => {
     return Kefir.stream(function(emitter) {
-        const jqXHR = axios(options);
-        jqXHR.then(emitter.emit);
-        jqXHR.catch(function (response) {
+        const XHR = axios(options);
+        XHR.then(emitter.emit);
+        XHR.catch(function (response) {
             if (response instanceof Error) {
             // Something happened in setting up the request that triggered an Error
             console.log('Error', response.message);
