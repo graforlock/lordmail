@@ -10,7 +10,7 @@ export const mirror = (obj) => {
     return o;
 }
 
-export const emitState = (state) => {
+export const emit = (state) => {
     return Kefir.stream(emitter => emitter.emit(state));
 };
 

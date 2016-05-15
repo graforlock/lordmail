@@ -1,14 +1,14 @@
 import Kefir from 'kefir';
 import actions from './index';
 import pool from './pool';
-import { ajax$, registerIntent } from '../utils/index';
+import { ajax$, registerIntent, emit } from '../utils/index';
 
 export default  {
   testAction: function(event) {
     pool.plug(
       registerIntent(
         actions.TEST_ACTION, 
-        Kefir.stream(emitter => emitter.emit(event))
+        emit(event)
       )
     );
   },

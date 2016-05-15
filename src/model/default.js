@@ -3,7 +3,7 @@ import Kefir from 'kefir';
 import pool from '../actions/pool';
 import actions from '../actions/index';
 
-import {emitState} from '../utils/index';
+import {emit} from '../utils/index';
 
 const model = Kefir.pool();
 
@@ -11,12 +11,12 @@ let _state = {
     counter: 0
 };
 
-let state$ = emitState(_state);
+let state$ = emit(_state);
 
 model.plug(state$);
 
 const defaultAction = () => {
-   state$ = emitState({
+   state$ = emit({
      counter: ++_state.counter
    });
    model.plug(state$);
