@@ -7,13 +7,17 @@ import test from './test';
   ------------------------------
   This particular model/state container combines the latest change, combines this stream and feeds it to the view.
 */
-export default Kefir.combine([def,test], 
-                  ({counter},{name, data}) => 
-                    (
-                        {
-                            counter,
-                            name,
-                            data
-                        }
-                    )
-                );
+
+const global = Kefir
+                 .combine([def,test], 
+                    ({counter},{name, data}) => 
+                      (
+                          {
+                              counter,
+                              name,
+                              data
+                          }
+                      )
+                  );
+                
+export default global;
