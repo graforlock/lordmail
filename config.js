@@ -20,6 +20,7 @@ System.config({
     "kefir": "node_modules/kefir/dist/kefir.js",
     "react": "node_modules/react/dist/react.js",
     "react-dom": "node_modules/react-dom/dist/react-dom.js",
+    "axios": "node_modules/axios/dist/axios.js",
     "github:jspm/nodelibs-assert@0.1.0": {
       "assert": "npm:assert@1.3.0"
     },

@@ -9,6 +9,8 @@ export default mirror({
   DEFAULT_ACTION: 
   'Description of the Default action here (...)',
   TEST_ACTION: 
-  'Description of the Test action here (...)'
+  'Description of the Test action here (...)',
+  PROMISE_ACTION: 
+  'Testing promise using axios (...)'
  /* ----------------- */
 });

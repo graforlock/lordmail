@@ -23,7 +23,7 @@ const defaultAction = () => {
 }
 
 pool.onValue(x => {
-  switch(x) {
+  switch(x.type) {
     case actions.DEFAULT_ACTION:
       defaultAction();
       break;
