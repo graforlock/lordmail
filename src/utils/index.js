@@ -2,6 +2,27 @@ import actions from '../actions/index';
 import Kefir from 'kefir';
 import axios from 'axios';
 
+/*
+ Action Pool.
+ -------------
+ Stores the name of the current action, that is being fed to the model.
+*/
+export const pool = Kefir.pool();
+
+export const plug = (intent) => {
+    return pool.plug(intent);
+};
+
+export class Model  {
+    constructor(state) {
+      this.pool = Kefir.pool().plug(state);
+    }
+    plug(state) {
+        this.pool.plug(state);
+    }
+};
+
+
 export const mirror = (obj) => {
     let o = {};
     Object.keys(obj).forEach(key => {
@@ -16,7 +37,8 @@ export const payload = (state) => {
 export const emitState = payload;
 
 export const registerIntent = (intentType, payload) => {
-    return Kefir.combine(
+    
+    return plug(Kefir.combine(
             [
                 Kefir.stream(emitter => emitter.emit(intentType)),
                 payload
@@ -24,7 +46,7 @@ export const registerIntent = (intentType, payload) => {
             (type, payload) => {
                 return {type, payload}
             }
-    );
+    ));
 }
 
 export const ajax$ = (options) => {

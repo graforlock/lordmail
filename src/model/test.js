@@ -1,8 +1,9 @@
 import Intents from '../actions/default-action';
 import Kefir from 'kefir';
-import pool from '../actions/pool';
+import { pool }  from '../utils/index';
 import actions from '../actions/index';
 import {emitState} from '../utils/index';
+
 
 const model = Kefir.pool();
 
