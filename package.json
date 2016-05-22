@@ -13,6 +13,8 @@
   "license": "ISC",
   "dependencies": {
     "axios": "^0.11.0",
+    "body-parser": "^1.15.1",
+    "express": "^4.13.4",
     "kefir": "^3.2.2",
     "react": "^15.0.2",
     "react-dom": "^15.0.2"
@@ -31,12 +33,14 @@
   },
   "jspm": {
     "dependencies": {
+      "jspm/nodelibs-fs": "github:jspm/nodelibs-fs@^0.1.2",
       "plugin-babel": "npm:systemjs-plugin-babel@^0.0.10"
     },
     "devDependencies": {
       "babel": "npm:babel-core@^5.8.24",
       "babel-runtime": "npm:babel-runtime@^5.8.24",
-      "core-js": "npm:core-js@^1.1.4"
+      "core-js": "npm:core-js@^1.1.4",
+      "plugin-babel-runtime": "npm:babel-runtime@^5.8.24"
     }
   }
 }

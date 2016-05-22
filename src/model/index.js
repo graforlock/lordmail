@@ -1,6 +1,7 @@
 
 import Kefir from 'kefir';
 import app from './app';
+import builder from './builder';
 
 /*
   Singleton State Container (Global Model)
@@ -9,11 +10,12 @@ import app from './app';
 */
 
 const global = Kefir
-                 .combine([app], 
-                    ({launched}) => 
+                 .combine([app, builder], 
+                    ({launched}, builder) => 
                       (
                           {
-                              launched
+                              launched,
+                              builder
                           }
                       )
                   );

@@ -1,5 +1,5 @@
 import Kefir from 'kefir';
-import { pool, range }  from '../utils/index';
+import { pool }  from '../utils/index';
 import actions from '../actions/index';
 
 import { emitState } from '../utils/index';
@@ -14,18 +14,14 @@ let state$ = emitState(_state);
 
 model.plug(state$);
 
-const launchCreator = () => {
-  _state.launched = !_state.launched;
-   state$ = emitState({
-     launched: _state.launched
-   });
-   model.plug(state$);
+const renderTemplate = () => {
+  console.log(_state);
 }
 
 pool.onValue(x => {
   switch(x.type) {
-    case actions.LAUNCH_CREATOR:
-      launchCreator();
+    case actions.RENDER_TEMPLATE:
+      renderTemplate();
       break;
   }
 });

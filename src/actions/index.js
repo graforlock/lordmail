@@ -13,6 +13,8 @@ const mirror = (obj) => {
 export default mirror({
  /* ----------------- */
   LAUNCH_CREATOR: 
-  'Description of the Default action here (...)'
+  'Launches the app.',
+  RENDER_TEMPLATE: 
+  'Renders the template according to the current builder schema model.',
  /* ----------------- */
 });

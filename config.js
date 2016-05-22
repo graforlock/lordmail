@@ -14,13 +14,16 @@ System.config({
   },
 
   map: {
+    "axios": "node_modules/axios/dist/axios.js",
     "babel": "npm:babel-core@5.8.38",
     "babel-runtime": "npm:babel-runtime@5.8.38",
     "core-js": "npm:core-js@1.2.6",
+    "fs": "github:jspm/nodelibs-fs@0.1.2",
     "kefir": "node_modules/kefir/dist/kefir.js",
+    "plugin-babel": "npm:systemjs-plugin-babel@0.0.10",
+    "plugin-babel-runtime": "npm:babel-runtime@5.8.38",
     "react": "node_modules/react/dist/react.js",
     "react-dom": "node_modules/react-dom/dist/react-dom.js",
-    "axios": "node_modules/axios/dist/axios.js",
     "github:jspm/nodelibs-assert@0.1.0": {
       "assert": "npm:assert@1.3.0"
     },

@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import Toggle from './components/toggle';
 import {between} from '../utils/index';
+import render from '../actions/render-template';
 
 class Builder extends Component {
     constructor(props) {
@@ -78,7 +79,7 @@ class Builder extends Component {
                     <hr/>
                     <div ><h5 className="add-row">add row</h5></div>
                     <hr/>
-                    <div ><button className="render-button">render</button></div>
+                    <div ><button onClick={render.renderTemplate} className="render-button">render</button></div>
                 </aside>
             </div>      
         );

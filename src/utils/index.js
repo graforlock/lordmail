@@ -1,7 +1,9 @@
 import actions from '../actions/index';
 import Kefir from 'kefir';
 import axios from 'axios';
+import {buildTemplate} from './template';
 
+buildTemplate();
 /*
  Action Pool.
  -------------
@@ -65,4 +67,3 @@ export const ajax$ = (options) => {
         });
     }).take(1).takeErrors(1).toProperty();
 }
-
