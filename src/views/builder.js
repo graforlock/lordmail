@@ -46,7 +46,6 @@ class Builder extends Component {
         const socket = io.connect('http://localhost:8080');
         socket.on('created_template', function() {
             document.querySelector('iframe').contentWindow.location.reload();                
-
         });   
     }
     componentWillUnmount() {
@@ -59,7 +58,8 @@ class Builder extends Component {
     dragMove(event) {
         if(this.dragging === true) {
             this.target.currentTarget.style.width = ((window.innerWidth - event.screenX) +5) + 'px';
-            document.querySelector('iframe').width = event.screenX;
+            document.querySelector('iframe').width = event.screenX -5;
+            this.adjustFrameHeight();
         }
     }
     dragStart(event) {
@@ -70,6 +70,11 @@ class Builder extends Component {
         if(between(event.pageX, this.dragPoint)) {
                 this.dragging = true;
         }
+    }
+    adjustFrameHeight() {
+        let iframe = document.querySelector('iframe');
+        iframe.height= "";
+        iframe.height = iframe.contentWindow.document.body.scrollHeight;
     }
     onChange(event, index) {
         if(event.target.value === 'select') return;
@@ -86,7 +91,7 @@ class Builder extends Component {
 
         return (
             <div className={`launch ${show}`}>
-                <iframe width="977" frameborder="0" height="1000" style={{border: 'none', margin: 0 -12}} src="table.html"></iframe>
+                <iframe width="977" height="1000" src="test.html"></iframe>
                 <aside onMouseDown={this.dragStart.bind(this)} className="sidebar">
                     <section className="drag-handle"></section>
                     <div onClick={this.addRow.bind(this)}><h5>transactional<Toggle active={this.state.mode} onClick={this.activeMode.bind(this)} mode="trans"/></h5></div>
