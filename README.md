@@ -7,7 +7,7 @@ Main functionality:
 
 - Node CLI tool that can be incorporated in the build process.
 - Integrate with jeykyll/premailer setup (for the latter, separate styles from the HTML).
-- Integrate premailer route for sending test emails.
+- Integrate Nodemailer along with its route for sending test emails.
 
 Secondary functionality:
 
