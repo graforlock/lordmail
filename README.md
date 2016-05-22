@@ -1,6 +1,6 @@
 ## Mailord
 
-A builder &  the way to deal with responsive email frustration & abstraction layer of creating responsive email templates.
+A builder &  the way to deal with responsive email frustration. Its an abstraction layer for creating responsive email templates.
 
 #### TODO
 Main functionality:
