@@ -94,9 +94,9 @@ class Builder extends Component {
                 <iframe width="977" height="1000" src="test.html"></iframe>
                 <aside onMouseDown={this.dragStart.bind(this)} className="sidebar">
                     <section className="drag-handle"></section>
-                    <div onClick={this.addRow.bind(this)}><h5>transactional<Toggle active={this.state.mode} onClick={this.activeMode.bind(this)} mode="trans"/></h5></div>
-                    <div onClick={this.addRow.bind(this)}><h5>menu<Toggle active={this.state.mode} onClick={this.activeMode.bind(this)} mode="menu"/></h5></div>
-                    <div onClick={this.addRow.bind(this)}><h5>weekly button<Toggle active={this.state.mode} onClick={this.activeMode.bind(this)} mode="weekly"/></h5></div>
+                    <div ><h5>transactional<Toggle active={this.state.mode} onClick={this.activeMode.bind(this)} mode="trans"/></h5></div>
+                    <div ><h5>menu<Toggle active={this.state.mode} onClick={this.activeMode.bind(this)} mode="menu"/></h5></div>
+                    <div ><h5>weekly button<Toggle active={this.state.mode} onClick={this.activeMode.bind(this)} mode="weekly"/></h5></div>
                     <hr/>
                     <div onClick={this.addRow.bind(this)}><h5 className="add-row">add row</h5></div>
                     { rows }
