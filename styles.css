@@ -81,12 +81,12 @@ body {
     background: white;
     opacity: 0;
     padding-top: 20px;
-    transform: translateY(20%);
+    transform: translateY(50%);
 }
 
 
 .launch.true .sidebar {
-    transition: opacity 2.5s ease-in, height 1s linear, transform 2s linear;
+    transition: opacity 2.5s ease-in, height 2s linear, transform 2s linear;
     opacity: 1;
     height: 100%;
 
