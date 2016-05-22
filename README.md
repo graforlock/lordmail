@@ -11,11 +11,11 @@ Main functionality:
 
 Secondary functionality:
 
-- Advanced rows edition: Change of text content on the fly;
-- Advanced rows edition: MailChimp (hideable, repeatable, variants);
-
+- Advanced rows edition: Change of text content on the fly.
+- Advanced rows edition: MailChimp (hideable, repeatable, variants).
+- Option to copy the code into the clipboard.
 
 Additional functionality: 
 
-- Improvements in templating engine that facilitate usage of functions (resizing/adjusting images upon editing)
+- Improvements in templating engine that facilitate usage of functions (resizing/adjusting images upon editing).
 
