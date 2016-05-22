@@ -3,6 +3,7 @@ import Toggle from './components/toggle';
 import Row from './components/row';
 import {between} from '../utils/index';
 import render from '../actions/render-template';
+import io from 'socket.io-client';
 
 class Builder extends Component {
     constructor(props) {
@@ -39,7 +40,14 @@ class Builder extends Component {
     componentDidMount() {
         window.addEventListener('mouseup', this.dragEnd.bind(this));
         window.addEventListener('mousemove', this.dragMove.bind(this));
-        
+
+    }
+    componentDidUpdate() {
+        const socket = io.connect('http://localhost:8080');
+        socket.on('created_template', function() {
+            document.querySelector('iframe').contentWindow.location.reload();                
+
+        });   
     }
     componentWillUnmount() {
         window.removeEventListener('mouseup', this.dragEnd.bind(this));
@@ -51,7 +59,6 @@ class Builder extends Component {
     dragMove(event) {
         if(this.dragging === true) {
             this.target.currentTarget.style.width = ((window.innerWidth - event.screenX) +5) + 'px';
-            console.log(event.screenX);
             document.querySelector('iframe').width = event.screenX;
         }
     }
@@ -64,11 +71,19 @@ class Builder extends Component {
                 this.dragging = true;
         }
     }
+    onChange(event, index) {
+        if(event.target.value === 'select') return;
+        
+        let rows = this.state.rows;
+        rows[index].type = event.target.value;
+        this.setState({rows})
+    }
     render() {
         let show = `${this.props.show}`;
         let rows = this.state.rows.map( (row, index) => {
-           return  <Row index={index} key={index} />
+           return  <Row index={index} key={index} onChange={this.onChange.bind(this)}/>
         });
+
         return (
             <div className={`launch ${show}`}>
                 <iframe width="977" frameborder="0" height="1000" style={{border: 'none', margin: 0 -12}} src="table.html"></iframe>
@@ -81,7 +96,7 @@ class Builder extends Component {
                     <div onClick={this.addRow.bind(this)}><h5 className="add-row">add row</h5></div>
                     { rows }
                     <hr/>
-                    <div ><button onClick={render.renderTemplate} className="render-button">render</button></div>
+                    <div ><button onClick={() => render.renderTemplate(this.state.rows)} className="render-button">render</button></div>
                 </aside>
             </div>      
         );

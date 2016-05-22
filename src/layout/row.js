@@ -1,6 +1,5 @@
-export default {
-    row: 
-    `<tr>
-        {{type}}
-    </tr>`
-}
+export default type => (
+        `<tr>
+            {{${type}}}
+        </tr>`   
+    );

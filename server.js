@@ -1,7 +1,9 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var app = express();
-var write = require('./utils/write');
+var fs = require('fs');
+var Promise = require('bluebird'),
+    writeFile = Promise.promisify(require('fs').writeFile);
 
 app.use('/', express.static('./'));
 
@@ -16,9 +18,8 @@ app.use('/*', function(req,res,next) {
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 
-var data = [
-  
-];
+var server = app.listen('8080');
+var io = require('socket.io')(server);
 
 
 app.get('/', function(req,res) {
@@ -26,10 +27,10 @@ app.get('/', function(req,res) {
 });
 
 app.post('/', function(req,res) {
-  write(req.body.layout, req.body.filename);
-  res.send(data);
+     io.on('connection', function(socket) {
+        fs.writeFileSync('test.html', req.body.layout, 'utf8');
+        socket.emit('created_template', {});
+    });
+    res.send(null);
 });
 
-app.listen(8080, function() {
-  console.log('running at 8080');
-});
