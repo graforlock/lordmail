@@ -15,7 +15,8 @@ let state$ = emitState(_state);
 model.plug(state$);
 
 const renderTemplate = () => {
-  console.log(_state);
+  $state = emitState(_state);
+  model.plug(state$);
 }
 
 pool.onValue(x => {

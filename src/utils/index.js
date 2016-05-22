@@ -3,7 +3,6 @@ import Kefir from 'kefir';
 import axios from 'axios';
 import {buildTemplate} from './template';
 
-buildTemplate();
 /*
  Action Pool.
  -------------

@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import Toggle from './components/toggle';
+import Row from './components/row';
 import {between} from '../utils/index';
 import render from '../actions/render-template';
 
@@ -7,7 +8,7 @@ class Builder extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            rows: [],
+            rows: props.rows,
             mode: {
                 trans: false,
                 menu: false,
@@ -65,8 +66,8 @@ class Builder extends Component {
     }
     render() {
         let show = `${this.props.show}`;
-        let rows = this.state.rows.map(row => {
-           return  
+        let rows = this.state.rows.map( (row, index) => {
+           return  <Row index={index} key={index} />
         });
         return (
             <div className={`launch ${show}`}>
@@ -77,7 +78,8 @@ class Builder extends Component {
                     <div onClick={this.addRow.bind(this)}><h5>menu<Toggle active={this.state.mode} onClick={this.activeMode.bind(this)} mode="menu"/></h5></div>
                     <div onClick={this.addRow.bind(this)}><h5>weekly button<Toggle active={this.state.mode} onClick={this.activeMode.bind(this)} mode="weekly"/></h5></div>
                     <hr/>
-                    <div ><h5 className="add-row">add row</h5></div>
+                    <div onClick={this.addRow.bind(this)}><h5 className="add-row">add row</h5></div>
+                    { rows }
                     <hr/>
                     <div ><button onClick={render.renderTemplate} className="render-button">render</button></div>
                 </aside>

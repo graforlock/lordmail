@@ -1,6 +1,7 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var app = express();
+var write = require('./utils/write');
 
 app.use('/', express.static('./'));
 
@@ -25,7 +26,7 @@ app.get('/', function(req,res) {
 });
 
 app.post('/', function(req,res) {
-  data.push(req.body.layout);
+  write(req.body.layout, req.body.filename);
   res.send(data);
 });
 

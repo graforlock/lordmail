@@ -16,11 +16,15 @@ body {
     text-align: center;
     background: #f7f7f7;
     transition: opacity .75s ease-in;
+    background-image: url('img/background.png');
+    background-size: cover;
 }
 
 .main-overlay.hide {
     opacity: 0;
-    transition: opacity .75s ease-in;
+    visibility: hidden;
+    transition: opacity .75s ease-in, visibility .1s linear;
+    transition-delay: 0s, .75s;
     
 }
 
@@ -39,14 +43,17 @@ body {
 
     color: lightseagreen;
     font-size: 22px;
-    background: white;
+    background: transparent;
     cursor: pointer;
     font-family: Monaco, Inconsolata, Menlo, Courier;
 
     transition:background 1.5s ease-in, padding-top 1s ease-in;
 }
 
-
+.main-overlay button:hover {
+        background: white;
+        transition: background .5s ease-in;
+}
   
 .main-overlay button:hover span:first-child {
     top: -150px;
@@ -104,6 +111,13 @@ body {
     float: right;
     cursor: pointer;
     
+}
+
+.launch .sidebar div h5 select {
+    float: right;
+    border-radius: 0;
+    border: 1px solid gainsboro;
+    color: gray;
 }
 
 .launch .sidebar div h5 span:before,

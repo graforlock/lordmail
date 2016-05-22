@@ -15,7 +15,8 @@ export const buildTemplate = () => {
         method: 'post',
         url: 'http://localhost:8080',
         data: {
-            layout: `${layout.head}${layout.footer}`
+            layout: `${layout.head}${layout.footer}`,
+            filename: 'test.html'
         }
     });
 }
