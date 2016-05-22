@@ -4,7 +4,7 @@
   "description": "React state container.",
   "main": "index.js",
   "scripts": {
-    "start": "npm run lite && concurrently babel --watch src --out-dir dist ",
+    "start": "npm run lite && concurrently npm run babel ",
     "babel": "babel --watch src --out-dir dist ",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lite": "lite-server"

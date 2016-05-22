@@ -76,6 +76,9 @@ class Builder extends Component {
                     <div onClick={this.addRow.bind(this)}><h5>menu<Toggle active={this.state.mode} onClick={this.activeMode.bind(this)} mode="menu"/></h5></div>
                     <div onClick={this.addRow.bind(this)}><h5>weekly button<Toggle active={this.state.mode} onClick={this.activeMode.bind(this)} mode="weekly"/></h5></div>
                     <hr/>
+                    <div ><h5 className="add-row">add row</h5></div>
+                    <hr/>
+                    <div ><button className="render-button">render</button></div>
                 </aside>
             </div>      
         );
