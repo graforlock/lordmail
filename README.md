@@ -1,5 +1,3 @@
-## FLUFFSTER 
+## Mailord
 
-### TODO
-- <s>Option to centralize the model/store structure (alter Flux methodology)
-- <s>Automate processes for actions and models: index, register, bundle.
+### A builder &  the way to deal with responsive email frustration.
