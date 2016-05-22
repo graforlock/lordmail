@@ -1,16 +1,15 @@
 import React from 'react';
-import Intents from '../actions/default-action';
-import IntentsTwo from '../actions/test-action';
+import Launch from './launch';
+import Builder from './builder';
 
-const Root = props => {
-    console.log(props);
+const Root = ({launched}) => {
+    let overlayClass = launched ? 'main-overlay hide' : 'main-overlay',
+        builderShow = launched;
     return (
-        <div><h1>Hey Ho {props.counter}</h1>
-            <button onClick={Intents.defaultAction}>click me</button>
-            <button onClick={IntentsTwo.testAction}>click me too</button>
-            <button onClick={IntentsTwo.promiseAction}>test the promise</button>
-            <p>{props.name}</p>
-        </div>  
+        <section>     
+            <Launch overlayClass={overlayClass} />
+            <Builder show={builderShow} />
+        </section>
     );
 }
 

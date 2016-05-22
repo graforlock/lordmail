@@ -12,15 +12,15 @@ export const pool = Kefir.pool();
 export const plug = (intent) => {
     return pool.plug(intent);
 };
+export const range = (start,end) => {
+    let _range = [];
+    for(let i = start; i < end; i++) {
+        _range.push(i);
+    }
+    return _range;
+}
 
-export class Model  {
-    constructor(state) {
-      this.pool = Kefir.pool().plug(state);
-    }
-    plug(state) {
-        this.pool.plug(state);
-    }
-};
+export const between = (position, point, offset = 2.5) => position <= (point + offset)  && position >= (point - offset); 
 
 
 export const mirror = (obj) => {

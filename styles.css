@@ -1,0 +1,153 @@
+body {
+    font-family: Monaco, Inconsolata, Menlo, Courier;    
+}
+
+*:focus {
+    outline: none;
+}
+
+.main-overlay {
+    opacity: 1;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    text-align: center;
+    background: #f7f7f7;
+    transition: opacity .75s ease-in;
+}
+
+.main-overlay.hide {
+    opacity: 0;
+    transition: opacity .75s ease-in;
+    
+}
+
+
+.main-overlay button {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: inline-block;
+    padding: 10px;
+    border-radius: 5px;
+    border: 2px dashed lightseagreen;
+    
+    z-index: 500;
+
+    color: lightseagreen;
+    font-size: 22px;
+    background: white;
+    cursor: pointer;
+    font-family: Monaco, Inconsolata, Menlo, Courier;
+
+    transition:background 1.5s ease-in, padding-top 1s ease-in;
+}
+
+
+  
+.main-overlay button:hover span:first-child {
+    top: -150px;
+    transition: top 1.5s linear;
+}
+
+.main-overlay small {
+    position: fixed;
+    bottom: 0;
+    margin: 0 auto;
+    left: 0;
+    right: 0;
+}
+
+.launch .sidebar {
+    position: fixed;
+    right: 0;
+    width: 100%;
+    height: 0%;
+    width: 300px;
+    min-width: 300px;
+    top: 0;
+    border-left: 3px solid gainsboro;
+    background: white;
+    opacity: 0;
+    padding-top: 20px;
+    transform: translateY(20%);
+}
+
+
+.launch.true .sidebar {
+    transition: opacity 2.5s ease-in, height 1s linear, transform 2s linear;
+    opacity: 1;
+    height: 100%;
+
+    transform: translateY(0);
+
+}
+
+.launch .sidebar div h5 {
+    margin: 20px 35px 20px 35px;
+    opacity: 0;
+    text-align: left;
+    font-weight: 100;
+    color: gray;
+    /*border-bottom: 1px solid gainsboro;*/
+}
+
+.launch .sidebar div h5 span {
+    border: 1px solid gainsboro;
+    background: gainsboro;
+    border-radius: 10px;
+    height: 20px;
+    width: 40px;
+    display: inline-block;
+    float: right;
+    cursor: pointer;
+    
+}
+
+.launch .sidebar div h5 span:before,
+.launch .sidebar div h5 span.active:before {
+    content: "No";
+    font-size: 8px;
+    color: gray;
+    box-sizing: border-box;
+    text-align: center;
+    line-height: 8px;
+    padding-top: 4.75px;
+    display: inline-block;
+    border-radius: 100%;
+    background: white;
+    height: 20px;
+    width: 20px;
+    vertical-align: middle;
+
+}
+
+.launch .sidebar div h5 span.active:before {
+    content: "Yes";
+    float: right;
+}
+
+
+.launch.true div h5 {
+    opacity: 1;
+    transition: opacity 1s ease-in;
+    transition-delay: 2.5s;
+}
+
+.drag-handle {
+    position: absolute;
+    left: -3px;
+    width: 3px;
+    height: 100%;
+    top: 0;
+    background: transparent;
+    cursor: ew-resize;
+}
+
+hr {
+    border: none;
+    border-bottom: 1px solid gainsboro;
+}

@@ -1,4 +1,10 @@
-import { mirror } from '../utils/index';
+const mirror = (obj) => {
+    let o = {};
+    Object.keys(obj).forEach(key => {
+        o[key] = key;
+    });
+    return o;
+}
 /*
     Action Index.
     -------------
@@ -6,11 +12,7 @@ import { mirror } from '../utils/index';
 */
 export default mirror({
  /* ----------------- */
-  DEFAULT_ACTION: 
-  'Description of the Default action here (...)',
-  TEST_ACTION: 
-  'Description of the Test action here (...)',
-  PROMISE_ACTION: 
-  'Testing promise using axios (...)'
+  LAUNCH_CREATOR: 
+  'Description of the Default action here (...)'
  /* ----------------- */
 });
