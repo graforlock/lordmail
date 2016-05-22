@@ -26,11 +26,11 @@ app.get('/', function(req,res) {
   res.render('index.html');
 });
 
-app.post('/', function(req,res) {
-     io.on('connection', function(socket) {
-        fs.writeFileSync('test.html', req.body.layout, 'utf8');
-        socket.emit('created_template', {});
-    });
-    res.send(null);
+io.on('connection', function(socket) {
+    socket.on('build_template', function(layout) {
+        fs.writeFileSync('test.html', layout, 'utf8');
+        io.emit('created_template', {});
+    })
 });
+
 
