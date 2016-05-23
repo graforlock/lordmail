@@ -11,9 +11,9 @@ A builder &  the way to deal with responsive email frustration. Its an abstracti
 
 #### TODO
 Main functionality:
-
-- Node CLI tool that can be incorporated in the build process.
+- Hot reloading feature.
 - Integrate with jeykyll/premailer setup (for the latter, separate styles from the HTML).
+- Node CLI tool that can be incorporated in the build process.
 - Integrate Nodemailer along with its route for sending test emails.
 
 Secondary functionality:
