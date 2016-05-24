@@ -17,7 +17,7 @@ Main functionality:
 - Implement as an Electron app.
  
 Secondary functionality:
-- Live styles editing
+- Advanced Live styles editing
 - Advanced rows edition: Change of text content on the fly.
 - Advanced rows edition: MailChimp (hideable, repeatable, variants).
 - Option to copy the code into the clipboard.
