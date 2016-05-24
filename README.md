@@ -15,6 +15,7 @@ Main functionality:
 - Integrate with MailChimp API.
 - Integrate Nodemailer along with its route for sending test emails.
 - Implement as an Electron app.
+- Empower templating language with for loop (DRY).
  
 Secondary functionality:
 - Hot reloading feature.
