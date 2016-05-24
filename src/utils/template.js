@@ -1,6 +1,7 @@
 import * as fs from 'fs';
 import layout from '../layout/index';
 import io from 'socket.io-client';
+import config from '../layout/config';
 
 export const template = (tpl, data) => {
         let regex = /{{([^}}]+)?}}/g,
@@ -11,11 +12,20 @@ export const template = (tpl, data) => {
         return tpl;
 }
             
-export const buildTemplate = (content) => {
+export const buildTemplate = (content, recipent) => {
     let _layout = `${layout.head}${content}${layout.footer}`;
     const socket = io.connect('http://localhost:8080');
+    switch(recipent) {
+        case false: 
+            socket.emit('build_template', _layout);
+            break;
+       default: 
+            socket.emit('send_email', recipent);
+    }
+}
+
+export const exportTemplate = (content, options) => {
     socket.emit('build_template', _layout);
-    
 }
 // export const adjustChild = new Function('size', 'if(parseInt(size)) { return size - 20; } else { console.warn("Size was \'" + size + "\' which is " + typeof size + ". Argument should be of type number.")}'); 
 

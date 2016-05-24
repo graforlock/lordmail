@@ -9,19 +9,25 @@ import { emitState } from '../utils/index';
 const model = Kefir.pool();
 
 let _state = {
-    rows: []
+    rows: [],
+    mode: {
+        trans: false,
+        menu: false,
+        weekly: false
+    }
 };
 
 let state$ = emitState(_state);
 
 model.plug(state$);
 
-const renderTemplate = (rows) => {
+const renderTemplate = ({rows, recipent = false}) => {
+  let tableRows = rows.map(row => {
+        return makeRow(row.type);
+    }).join('');
+  let tableInnerContent = template(tableRows, types);
   
-  let contentSection = template(rows.map(row => {
-      return makeRow(row.type);
-  }).join(''), types);
-  buildTemplate(contentSection);
+  buildTemplate(tableInnerContent, recipent);
   
   _state.rows = rows;
   state$ = emitState(_state);
@@ -31,6 +37,9 @@ const renderTemplate = (rows) => {
 pool.onValue(x => {
   switch(x.type) {
     case actions.RENDER_TEMPLATE:
+      renderTemplate(x.payload);
+      break;
+    case actions.SEND_EMAIL:
       renderTemplate(x.payload);
       break;
   }

@@ -3,6 +3,7 @@ import Toggle from './components/toggle';
 import Row from './components/row';
 import {between} from '../utils/index';
 import render from '../actions/render-template';
+import email from '../actions/send-email';
 import io from 'socket.io-client';
 
 class Builder extends Component {
@@ -10,11 +11,7 @@ class Builder extends Component {
         super(props);
         this.state = {
             rows: props.rows,
-            mode: {
-                trans: false,
-                menu: false,
-                weekly: false
-            }
+            mode: props.mode
         }
     }
     addRow() {
@@ -83,12 +80,20 @@ class Builder extends Component {
         rows[index].type = event.target.value;
         this.setState({rows})
     }
+    sendEmail = (event) => {
+        let address = prompt('Please enter your valid email address:'),
+            regex = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+        if(regex.test(address)) {
+            email.sendEmail({rows: this.state.rows, recipent: address});
+        } else {
+            alert('Invalid email address given: ' + address);
+        }
+    }
     render() {
         let show = `${this.props.show}`;
         let rows = this.state.rows.map( (row, index) => {
            return  <Row index={index} key={index} onChange={this.onChange.bind(this)}/>
         });
-
         return (
             <div className={`launch ${show}`}>
                 <iframe width="977" height="1000" src="test.html"></iframe>
@@ -101,7 +106,10 @@ class Builder extends Component {
                     <div onClick={this.addRow.bind(this)}><h5 className="add-row">add row</h5></div>
                     { rows }
                     <hr/>
-                    <div ><button onClick={() => render.renderTemplate(this.state.rows)} className="render-button">render</button></div>
+                    <div >
+                        <button onClick={() => render.renderTemplate({rows: this.state.rows})} className="render-button">render</button>
+                        <button onClick={this.sendEmail} className="render-button">send email</button>
+                    </div>
                 </aside>
             </div>      
         );

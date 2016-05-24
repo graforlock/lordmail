@@ -2,8 +2,10 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var app = express();
 var fs = require('fs');
-var Promise = require('bluebird'),
-    writeFile = Promise.promisify(require('fs').writeFile);
+var mailer = require('./utils/mailer');
+
+require('shelljs/global');
+
 
 app.use('/', express.static('./'));
 
@@ -30,6 +32,16 @@ io.on('connection', function(socket) {
     socket.on('build_template', function(layout) {
         fs.writeFileSync('test.html', layout, 'utf8');
         io.emit('created_template', {});
+    })
+    socket.on('send_email', function(address) {
+        exec('premailer test.html', function(error, output) {
+          if(!error) {
+              mailer.send(address, output);
+              io.emit('email_sent', {});
+          } else {
+              console.warn('Errored with code ' + error);
+          }
+        })
     })
 });
 
