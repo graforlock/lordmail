@@ -11,12 +11,13 @@ A builder &  the way to deal with responsive email frustration. Its an abstracti
 
 #### TODO
 Main functionality:
-- Hot reloading feature.
 - Integrate with jeykyll/premailer setup (for the latter, separate styles from the HTML).
+- Integrate with MailChimp API.
 - Integrate Nodemailer along with its route for sending test emails.
 - Implement as an Electron app.
  
 Secondary functionality:
+- Hot reloading feature.
 - Advanced Live styles editing
 - Advanced rows edition: Change of text content on the fly.
 - Advanced rows edition: MailChimp (hideable, repeatable, variants).
