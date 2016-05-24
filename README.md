@@ -14,7 +14,6 @@ Main functionality:
 - Integrate with jeykyll/premailer setup (for the latter, separate styles from the HTML).
 - Integrate with MailChimp API.
 - Integrate Nodemailer along with its route for sending test emails.
-- Implement as an Electron app.
 - Empower templating language with for loop (DRY).
  
 Secondary functionality:
@@ -29,3 +28,5 @@ Additional functionality:
 
 - Improvements in templating engine that facilitate usage of functions (resizing/adjusting images upon editing).
 
+Maybe:
+- Implement as an Electron app.
