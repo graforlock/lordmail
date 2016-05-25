@@ -5,6 +5,8 @@ import col6 from './6col';
 import lsidebar from './lsidebar';
 import rsidebar from './rsidebar';
 import txtcol from './txtcol';
+import rzigzag from './rzigzag';
+import lzigzag from './lzigzag';
 
 export default {
     col1,
@@ -13,5 +15,7 @@ export default {
     col6,
     lsidebar,
     rsidebar,
+    rzigzag,
+    lzigzag,
     txtcol 
 }
