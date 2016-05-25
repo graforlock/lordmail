@@ -1,5 +1,5 @@
 export default type => (
-        `<tr>
+        `<tr mc:hideable="" >
             {{${type}}}
         </tr>`   
     );
