@@ -22,6 +22,7 @@ let state$ = emitState(_state);
 model.plug(state$);
 
 const renderTemplate = ({rows, recipent = false}) => {
+  
   let tableRows = rows.map(row => {
         return makeRow(row.type);
     }).join('');

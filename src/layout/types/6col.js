@@ -26,7 +26,9 @@ export default `
                             </table>
                         </div>
                         <!--[if (gte mso 9)|(IE)]>
-                        </td><td width="200" valign="top">
+                        </td>
+                        
+                        <td width="200" valign="top">
                         <![endif]-->
                         <div class="column">
                             <table width="100%">
