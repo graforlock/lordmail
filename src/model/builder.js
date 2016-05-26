@@ -22,18 +22,16 @@ let state$ = emitState(_state);
 model.plug(state$);
 
 const renderTemplate = ({rows, mode, recipent = false}) => {
-  let precompiled = {
-    tableRows: rows.map((row,index) => {
-          return partials.row(row.type,index);
-      }).join(''),
-    menuRow: partials.menu(mode)
-  }
-   
-   let compiled = {
-     tableInnerContent: template(precompiled.menuRow.concat(precompiled.tableRows), types)
-   }
-  
-  buildTemplate(compiled.tableInnerContent, recipent);
+  let precompiled = 
+  [
+    partials.menu(mode),
+    rows.map((row,index) => { return partials.row(row.type,index); }).join('')
+             
+  ].reduce((a,b) => (a.concat(b)));
+ 
+  let compiled = template(precompiled, types);
+
+  buildTemplate(compiled, recipent);
   
   _state.rows = rows;
   state$ = emitState(_state);
