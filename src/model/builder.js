@@ -1,8 +1,7 @@
 import Kefir from 'kefir';
 import { pool }  from '../utils/index';
 import actions from '../actions/index';
-import makeRow from '../layout/row';
-import menu from '../layout/partials/menu';
+import partials from '../layout/partials/index';
 import types from '../layout/types/index';
 import { template, buildTemplate } from '../utils/template';
 import { emitState } from '../utils/index';
@@ -23,20 +22,18 @@ let state$ = emitState(_state);
 model.plug(state$);
 
 const renderTemplate = ({rows, mode, recipent = false}) => {
-
-  let tableRows = rows.map((row,index) => {
-        return makeRow(row.type,index);
-    }).join('');
-    
-    // having {{menu/header}} now we can run it through template once 
-    // after concat with { menu: 'htmlcontent' }  leaving transacion type(s) in
-    // {{type}} thus separating these from menu.js
-    
-   let render = {
-     tableInnerContent: template(menu(mode).concat(tableRows), types)
+  let precompiled = {
+    tableRows: rows.map((row,index) => {
+          return partials.row(row.type,index);
+      }).join(''),
+    menuRow: partials.menu(mode)
+  }
+   
+   let compiled = {
+     tableInnerContent: template(precompiled.menuRow.concat(precompiled.tableRows), types)
    }
   
-  buildTemplate(render.tableInnerContent, recipent);
+  buildTemplate(compiled.tableInnerContent, recipent);
   
   _state.rows = rows;
   state$ = emitState(_state);
