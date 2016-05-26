@@ -1,10 +1,11 @@
 import Kefir from 'kefir';
 import { pool }  from '../utils/index';
 import actions from '../actions/index';
-import partials from '../layout/partials/index';
-import types from '../layout/types/index';
-import { template, buildTemplate } from '../utils/template';
 import { emitState } from '../utils/index';
+
+import partials from '../layout/partials/index';
+import contentTypes from '../layout/types/index';
+import { template, buildTemplate } from '../utils/template';
 
 const model = Kefir.pool();
 
@@ -29,7 +30,7 @@ const renderTemplate = ({rows, mode, recipent = false}) => {
              
   ].reduce((a,b) => (a.concat(b)));
  
-  let compiled = template(precompiled, types);
+  let compiled = template(precompiled, contentTypes);
 
   buildTemplate(compiled, recipent);
   
