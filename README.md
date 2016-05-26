@@ -11,7 +11,6 @@ A builder &  the way to deal with responsive email frustration. Its an abstracti
 
 #### TODO
 Main functionality:
-- Integrate Hogan.js templates in.
 - Integrate with jeykyll/premailer setup (for the latter, separate styles from the HTML).
 - Integrate with MailChimp API.
 - Integrate Nodemailer along with its route for sending test emails.
