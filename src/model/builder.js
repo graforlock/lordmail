@@ -23,6 +23,7 @@ let state$ = emitState(_state);
 model.plug(state$);
 
 const renderTemplate = ({rows, mode, recipent = false}) => {
+  // compose(subscribeMake(mode),menuMake(mode), rowMake(rows)) ????
   let precompiled = 
   [
     partials.menu(mode),
