@@ -1,15 +1,27 @@
-export default `        
-        <table cellpadding="0" cellspacing="0" border="0" mc:hideable align="center hide-mobile" width="600">
-            <tr><!--SPACER--><td width="100%" height="3" colspan="3" class="spacer preview-text" mc:edit="preview_text"></td></tr>
-        </table>
-
-        <table class="mobile-full-width bg-light-grey" cellpadding="0" cellspacing="0" border="0" mc:hideable align="center" width="600">
-            <tr><!--SPACER--><td width="100%" height="5" colspan="3" class="spacer"></td></tr>
-            <tr>
-                <!--SPACER--><td width="100" class="spacer spacer-h"></td>
-                <td mc:edit="delivery-returns" class="delivery-returns" align="center">FREE DELIVERY AND RETURNS</td>
-                <!--SPACER--><td width="100" class="spacer spacer-h preview-text"></td>
-            </tr>
-            <tr><!--SPACER--><td width="100%" height="5" colspan="3" class="spacer"></td></tr>
-        </table>
-`
+export default ({menu, trans}) => (`
+                ${menu ?         
+                    `<td class="one-column">
+                        <table width="100%">
+                            <tr>
+                                <td class="inner contents">
+                                    ${trans ? 
+                                        `<a class="hide-mobile" href="http://www.swooneditions.com/auth/{{var customer.auth_token}}/current-editions">View All</a>
+                                        <a href="http://www.swooneditions.com/auth/{{var customer.auth_token}}/chairs">Chairs</a>
+                                        <a href="http://www.swooneditions.com/auth/{{var customer.auth_token}}/sofas">Sofas</a>
+                                        <a href="http://www.swooneditions.com/auth/{{var customer.auth_token}}/tables">Tables</a>
+                                        <a href="http://www.swooneditions.com/auth/{{var customer.auth_token}}/storage">Storage</a>
+                                        <a class="hide-mobile" href="http://www.swooneditions.com/auth/{{var customer.auth_token}}/smith-mattress-story">Mattresses</a>`
+                                        
+                                    : 
+                                    `<a class="hide-mobile" href="http://www.swooneditions.com/auth/*|AUTHTOKEN|*/current-editions">View All</a>
+                                        <a href="http://www.swooneditions.com/auth/*|AUTHTOKEN|*/chairs">Chairs</a>
+                                        <a href="http://www.swooneditions.com/auth/*|AUTHTOKEN|*/sofas">Sofas</a>
+                                        <a href="http://www.swooneditions.com/auth/*|AUTHTOKEN|*/tables">Tables</a>
+                                        <a href="http://www.swooneditions.com/auth/*|AUTHTOKEN|*/storage">Storage</a>
+                                        <a class="hide-mobile" href="http://www.swooneditions.com/auth/*|AUTHTOKEN|*/smith-mattress-story">Mattresses</a>`
+                                    }
+                                </td>
+                            </tr>
+                        </table>
+                    </td>`
+                : ''}`)

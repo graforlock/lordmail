@@ -1,5 +1,10 @@
-export default type => (
-        `<tr mc:hideable="" >
+export default (type, index) => (
+        `
+        ${index === 0 
+            ? 
+            `{{header}}`
+           : ``}
+        <tr mc:hideable="" >
             {{${type}}}
         </tr>`   
     );

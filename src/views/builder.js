@@ -107,7 +107,7 @@ class Builder extends Component {
                     { rows }
                     <hr/>
                     <div >
-                        <button onClick={() => render.renderTemplate({rows: this.state.rows})} className="render-button">render</button>
+                        <button onClick={() => render.renderTemplate({rows: this.state.rows, mode: this.state.mode})} className="render-button">render</button>
                         <button onClick={this.sendEmail} className="render-button">send email</button>
                     </div>
                 </aside>
