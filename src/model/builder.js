@@ -29,7 +29,7 @@ const renderTemplate = ({rows, mode, recipent = false}) => {
     }).join('');
     
     // having {{menu/header}} now we can run it through template once 
-    // after concat with { menu: 'htmlcontent' }  leaving transacion type in
+    // after concat with { menu: 'htmlcontent' }  leaving transacion type(s) in
     // {{type}} thus separating these from menu.js
     
    let render = {
