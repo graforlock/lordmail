@@ -1,4 +1,4 @@
-export default  `
+export default  ({email}) => (`
                <td class="one-column">
                     <table width="100%">
                         <tr>
@@ -15,4 +15,4 @@ export default  `
                             </tr>
                         </table>
                 </td>
-            `
+            `)
