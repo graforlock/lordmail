@@ -28,7 +28,7 @@ const renderTemplate = ({rows, mode, recipent = false}) => {
     partials.menu(mode),
     rows.map((row,index) => { return partials.row(row.type,index); }).join('')
              
-  ].reduce((a,b) => (a.concat(b)));
+  ].join('');
  
   let compiled = template(precompiled, contentTypes);
 

@@ -21,8 +21,9 @@ export const range = (start,end) => {
     return _range;
 }
 
-export const between = (position, point, offset = 2.5) => position <= (point + offset)  && position >= (point - offset); 
+export const compose = (...fns) => (v) => fns.reverse().reduce((a,b) => b(a), v);
 
+export const between = (position, point, offset = 2.5) => position <= (point + offset)  && position >= (point - offset); 
 
 export const mirror = (obj) => {
     let o = {};
