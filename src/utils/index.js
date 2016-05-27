@@ -21,6 +21,10 @@ export const range = (start,end) => {
     return _range;
 }
 
+export const typeOf = (object) => {
+    return {}.toString.call(object);
+}
+
 export const compose = (...fns) => (v) => fns.reverse().reduce((a,b) => b(a), v);
 
 export const partial = (fn)  => {
