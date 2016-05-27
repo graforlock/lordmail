@@ -37,9 +37,9 @@ export const partial = (fn)  => {
     }
 }
 
-// export const flip = partial((fn, ...args) => {
-//     return fn(args.reverse());
-// })
+export const flip = partial((fn, ...args) => {
+    return fn(...args.reverse());
+})
 
 export const map = partial((fn, array) => {
     return array.map(fn);
