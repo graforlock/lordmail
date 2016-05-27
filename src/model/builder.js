@@ -24,8 +24,9 @@ model.plug(state$);
 
 const renderTemplate = ({rows, mode, recipent = false}) => {
   
-  // Build and send the template to render
+  // Destructuring the partials  
   let {row, menu, social} = partials;
+  // Build and send the template to render
   const createRows = compose(join, map(row)); //-->  Functional composition: Template each row (functor is partially applied)
   let precompiled = bundle(
       menu(mode),
