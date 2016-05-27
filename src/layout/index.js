@@ -32,6 +32,17 @@ export default {
             img {
                 border: 0;
             }
+            /* Custom Elements */
+            .button-secondary {
+                border: 1px solid black;
+                padding: 15px 30px;
+                text-decoration: none;
+                color: black;
+                margin: 0 auto;
+                display: block;
+                width: 100%;
+                max-width: 300px;
+            }
             /* Android KitKat fix */
             div[style*="margin: 16px 0"] { 
                 margin:0 !important;

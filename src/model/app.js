@@ -7,7 +7,8 @@ import {emitState } from '../utils/index';
 const model = Kefir.pool();
 
 let _state = {
-    launched: false
+    launched: false,
+    prompt: ''
 };
 
 
@@ -23,10 +24,22 @@ const launchCreator = () => {
    model.plug(state$);
 }
 
+const getPromptvalue = (promptValue) => {
+  console.log(promptValue);
+  _state.prompt = promptValue;
+     state$ = emitState({
+     prompt: _state.prompt
+   });
+   model.plug(state$);
+}
+
 pool.onValue(x => {
   switch(x.type) {
     case actions.LAUNCH_CREATOR:
       launchCreator();
+      break;
+    case actions.GET_PROMPT:
+      getPromptvalue(x.payload);
       break;
   }
 });

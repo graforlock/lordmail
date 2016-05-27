@@ -12,17 +12,21 @@ A builder &  the way to deal with responsive email frustration. Its an abstracti
 #### TODO
 Main functionality:
 - Integrate with jeykyll/premailer setup (for the latter, separate styles from the HTML).
+- Empower templating language with for loop (DRY), or seek for a templating language.
+- Advanced rows edition: Change of text content on the fly, change of the width.
+- MailChimp mc attributes in a logical way (hideable, repeatable, variants).
+- Atomise the column creation so user can choose different variants for each column.
 - Integrate with MailChimp API.
-- Integrate Nodemailer along with its route for sending test emails.
+
  
 Secondary functionality:
 
 - Advanced Live styles editing
+
 - Hot reloading w/ Litmus feature for Outlook & the rest.
 - Advanced rows edition: Change of text content on the fly.
 - Advanced rows edition: MailChimp (hideable, repeatable, variants).
 - Option to copy the code into the clipboard.
-- Node CLI tool that can be incorporated in the build process.
 
 Additional functionality: 
 

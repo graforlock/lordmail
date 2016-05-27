@@ -14,6 +14,8 @@ const Row = ({index, onChange}) => {
             <option value="col6">Three Column Row (Stack)</option>
             <option value="lsidebar">Sidebar Row</option>
             <option value="rsidebar">Sidebar Row(Reverse)</option>
+            <option value="rzigzag">Zig Zag (Right to Left)</option>
+            <option value="lzigzag">Zig Zag (Left to Right)</option>
         </select>
         </h5>
     </div>

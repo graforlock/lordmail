@@ -35,15 +35,15 @@ class Builder extends Component {
         this.setState({mode: _modeState});
     }
     componentDidMount() {
-        window.addEventListener('mouseup', this.dragEnd.bind(this));
-        window.addEventListener('mousemove', this.dragMove.bind(this));
-
-    }
-    componentDidUpdate() {
-        const socket = io.connect('http://localhost:8080');
-        socket.on('created_template', function() {
+        this.socket = io.connect('http://localhost:8080');
+        this.socket.on('created_template', function() {
             document.querySelector('iframe').contentWindow.location.reload();                
         });   
+        window.addEventListener('mouseup', this.dragEnd.bind(this));
+        window.addEventListener('mousemove', this.dragMove.bind(this));
+        setTimeout(() => {
+            this.adjustFrameHeight();
+        },500)
     }
     componentWillUnmount() {
         window.removeEventListener('mouseup', this.dragEnd.bind(this));
@@ -54,8 +54,8 @@ class Builder extends Component {
     }
     dragMove(event) {
         if(this.dragging === true) {
-            this.target.currentTarget.style.width = ((window.innerWidth - event.screenX) +5) + 'px';
-            document.querySelector('iframe').width = event.screenX -5;
+            this.target.currentTarget.style.width = ((window.innerWidth - event.screenX)) + 'px';
+            document.querySelector('iframe').width = event.screenX;
             this.adjustFrameHeight();
         }
     }
@@ -64,7 +64,7 @@ class Builder extends Component {
         let target = ev.currentTarget;
         this.target = ev;
         this.dragPoint = window.innerWidth - target.offsetWidth;
-        if(between(event.pageX, this.dragPoint)) {
+        if(event.target.id === 'drag-handle') {
                 this.dragging = true;
         }
     }
@@ -98,7 +98,7 @@ class Builder extends Component {
             <div className={`launch ${show}`}>
                 <iframe width="977" height="1000" src="test.html"></iframe>
                 <aside onMouseDown={this.dragStart.bind(this)} className="sidebar">
-                    <section className="drag-handle"></section>
+                    <section id="drag-handle" className="drag-handle"></section>
                     <div ><h5>transactional<Toggle active={this.state.mode} onClick={this.activeMode.bind(this)} mode="trans"/></h5></div>
                     <div ><h5>menu<Toggle active={this.state.mode} onClick={this.activeMode.bind(this)} mode="menu"/></h5></div>
                     <div ><h5>weekly button<Toggle active={this.state.mode} onClick={this.activeMode.bind(this)} mode="weekly"/></h5></div>
@@ -107,7 +107,7 @@ class Builder extends Component {
                     { rows }
                     <hr/>
                     <div >
-                        <button onClick={() => render.renderTemplate({rows: this.state.rows})} className="render-button">render</button>
+                        <button onClick={() => render.renderTemplate({rows: this.state.rows, mode: this.state.mode})} className="render-button">render</button>
                         <button onClick={this.sendEmail} className="render-button">send email</button>
                     </div>
                 </aside>

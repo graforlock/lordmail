@@ -11,7 +11,19 @@ export const template = (tpl, data) => {
         }
         return tpl;
 }
-            
+
+export const repeat = (times) =>  {
+    return {
+        html: (content) => {
+            let stringResult = []; 
+            for(let i = 0; i < times; i++) {
+                stringResult.push(content);
+            }
+            return stringResult.join('');
+        }
+    }
+};
+
 export const buildTemplate = (content, recipent) => {
     let _layout = `${layout.head}${content}${layout.footer}`;
     const socket = io.connect('http://localhost:8080');

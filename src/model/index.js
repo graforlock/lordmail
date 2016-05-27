@@ -11,10 +11,11 @@ import builder from './builder';
 
 const global = Kefir
                  .combine([app, builder], 
-                    ({launched}, builder) => 
+                    ({launched, prompt}, builder) => 
                       (
                           {
                               launched,
+                              prompt,
                               builder
                           }
                       )

@@ -16,6 +16,7 @@
     "bluebird": "^3.4.0",
     "body-parser": "^1.15.1",
     "express": "^4.13.4",
+    "hogan.js": "^3.0.2",
     "kefir": "^3.2.2",
     "nodemailer": "^2.4.1",
     "react": "^15.0.2",

@@ -1,10 +1,11 @@
 import Kefir from 'kefir';
-import { pool }  from '../utils/index';
+import { pool, compose, join, strconcat as bundle, map }  from '../utils/index';
 import actions from '../actions/index';
-import makeRow from '../layout/row';
-import types from '../layout/types/index';
-import { template, buildTemplate } from '../utils/template';
 import { emitState } from '../utils/index';
+
+import partials from '../layout/partials/index';
+import contentTypes from '../layout/types/index';
+import { template, buildTemplate } from '../utils/template';
 
 const model = Kefir.pool();
 
@@ -21,14 +22,23 @@ let state$ = emitState(_state);
 
 model.plug(state$);
 
-const renderTemplate = ({rows, recipent = false}) => {
-  let tableRows = rows.map(row => {
-        return makeRow(row.type);
-    }).join('');
-  let tableInnerContent = template(tableRows, types);
+const renderTemplate = ({rows, mode, recipent = false}) => {
   
-  buildTemplate(tableInnerContent, recipent);
+  // Destructuring the partials  
+  let {row, menu, social, button} = partials;
   
+  // Build and send the template to render
+  const createRows = compose(join, map(row)); //-->  Functional composition: Template each row (functor is partially applied)
+  let precompiled = bundle(
+      menu(mode),
+      createRows(rows),
+      social,
+      button(mode)
+    );
+  let compiled = template(precompiled, contentTypes);
+  buildTemplate(compiled, recipent);
+  
+  // Update the state:
   _state.rows = rows;
   state$ = emitState(_state);
   model.plug(state$);

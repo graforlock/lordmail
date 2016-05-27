@@ -21,8 +21,43 @@ export const range = (start,end) => {
     return _range;
 }
 
-export const between = (position, point, offset = 2.5) => position <= (point + offset)  && position >= (point - offset); 
+export const typeOf = (object) => {
+    return {}.toString.call(object);
+}
 
+export const compose = (...fns) => (v) => fns.reverse().reduce((a,b) => b(a), v);
+
+export const partial = (fn)  => {
+    let arity = fn.length;
+    return getArgs([]);
+    function getArgs(totalArgs) {
+        return function stepTwo(...args) {
+            var nextTotalArgs = totalArgs.concat(args);
+            if (nextTotalArgs.length >= arity)
+                return fn.apply(this, nextTotalArgs);
+            else
+                return getArgs(nextTotalArgs);
+        }
+    }
+}
+
+export const flip = partial((fn, ...args) => {
+    return fn(...args.reverse());
+})
+
+export const map = partial((fn, array) => {
+    return array.map(fn);
+})
+
+export const join = (array) => {
+    return array.join('');
+}
+
+export const strconcat = (...strings) => {
+    return strings.reduce((a,b) => a.concat(b), '');
+}
+
+export const between = (position, point, offset = 2.5) => position <= (point + offset)  && position >= (point - offset); 
 
 export const mirror = (obj) => {
     let o = {};

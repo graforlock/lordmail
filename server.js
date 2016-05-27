@@ -1,11 +1,11 @@
 var express = require('express');
+var path = require('path');
 var bodyParser = require('body-parser');
 var app = express();
 var fs = require('fs');
 var mailer = require('./utils/mailer');
 
 require('shelljs/global');
-
 
 app.use('/', express.static('./'));
 
@@ -22,11 +22,6 @@ app.use(bodyParser.urlencoded({extended: false}));
 
 var server = app.listen('8080');
 var io = require('socket.io')(server);
-
-
-app.get('/', function(req,res) {
-  res.render('index.html');
-});
 
 io.on('connection', function(socket) {
     socket.on('build_template', function(layout) {
