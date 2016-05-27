@@ -35,15 +35,13 @@ class Builder extends Component {
         this.setState({mode: _modeState});
     }
     componentDidMount() {
+        this.socket = io.connect('http://localhost:8080');
+        this.socket.on('created_template', function() {
+            document.querySelector('iframe').contentWindow.location.reload();                
+        });   
         window.addEventListener('mouseup', this.dragEnd.bind(this));
         window.addEventListener('mousemove', this.dragMove.bind(this));
 
-    }
-    componentDidUpdate() {
-        const socket = io.connect('http://localhost:8080');
-        socket.on('created_template', function() {
-            document.querySelector('iframe').contentWindow.location.reload();                
-        });   
     }
     componentWillUnmount() {
         window.removeEventListener('mouseup', this.dragEnd.bind(this));
