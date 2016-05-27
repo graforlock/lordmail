@@ -1,5 +1,5 @@
 import Kefir from 'kefir';
-import { pool }  from '../utils/index';
+import { pool, compose, join, strconcat, map }  from '../utils/index';
 import actions from '../actions/index';
 import { emitState } from '../utils/index';
 
@@ -23,18 +23,17 @@ let state$ = emitState(_state);
 model.plug(state$);
 
 const renderTemplate = ({rows, mode, recipent = false}) => {
-  // compose(subscribeMake(mode),menuMake(mode), rowMake(rows)) ????
-  let precompiled = 
-  [
-    partials.menu(mode),
-    rows.map((row,index) => { return partials.row(row.type,index); }).join('')
-             
-  ].join('');
- 
+  // Build and send the template to render
+  let {row, menu, social} = partials;
+  const createRows = compose(join, map(row));
+  let precompiled = strconcat(
+      menu(mode),
+      createRows(rows)
+    );
   let compiled = template(precompiled, contentTypes);
-
   buildTemplate(compiled, recipent);
   
+  // Update the state:
   _state.rows = rows;
   state$ = emitState(_state);
   model.plug(state$);

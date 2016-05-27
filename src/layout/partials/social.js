@@ -1,5 +1,5 @@
 export default
-`
+`<tr>
         <td class="one-column">
                     <table width="100%">
                         <tr>
@@ -20,4 +20,5 @@ export default
                         </tr>
                     </table>
         </td>
+   </tr>
 `
