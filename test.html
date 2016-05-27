@@ -30,6 +30,17 @@
             img {
                 border: 0;
             }
+            /* Custom Elements */
+            .button-secondary {
+                border: 1px solid black;
+                padding: 15px 30px;
+                text-decoration: none;
+                color: black;
+                margin: 0 auto;
+                display: block;
+                width: 100%;
+                max-width: 300px;
+            }
             /* Android KitKat fix */
             div[style*="margin: 16px 0"] { 
                 margin:0 !important;
@@ -244,7 +255,7 @@
                 
                     <tr>
                         <td class="full-width-image">
-                                        <a href="http://www.swooneditions.com/auth/*|AUTHTOKEN|*/">
+                                        <a href="http://www.swooneditions.com/auth/undefined/">
                                             <img src="http://placehold.it/600x100" class="logo" height="100">
                                         </a>
                         </td>
@@ -254,17 +265,32 @@
                             <table width="100%">
                                 <tr>
                                     <td class="inner contents">
-                                        <a class="hide-mobile" href="http://www.swooneditions.com/auth/*|AUTHTOKEN|*/current-editions">View All</a>
-                                            <a href="http://www.swooneditions.com/auth/*|AUTHTOKEN|*/chairs">Chairs</a>
-                                            <a href="http://www.swooneditions.com/auth/*|AUTHTOKEN|*/sofas">Sofas</a>
-                                            <a href="http://www.swooneditions.com/auth/*|AUTHTOKEN|*/tables">Tables</a>
-                                            <a href="http://www.swooneditions.com/auth/*|AUTHTOKEN|*/storage">Storage</a>
-                                            <a class="hide-mobile" href="http://www.swooneditions.com/auth/*|AUTHTOKEN|*/smith-mattress-story">Mattresses</a>
+                                        <a class="hide-mobile" href="http://www.swooneditions.com/auth/undefined/current-editions">View All</a>
+                                            <a href="http://www.swooneditions.com/auth/undefined/chairs">Chairs</a>
+                                            <a href="http://www.swooneditions.com/auth/undefined/sofas">Sofas</a>
+                                            <a href="http://www.swooneditions.com/auth/undefined/tables">Tables</a>
+                                            <a href="http://www.swooneditions.com/auth/undefined/storage">Storage</a>
+                                            <a class="hide-mobile" href="http://www.swooneditions.com/auth/undefined/smith-mattress-story">Mattresses</a>
                                     </td>
                                 </tr>
                             </table>
                         </td>
                     </tr>
+        <tr mc:hideable="" >
+             
+                <td class="one-column">
+                    <table width="100%">
+                        <tr>
+                            <td class="inner contents">
+                                <p class="h1">Lorem ipsum dolor sit amet</p>
+                                <p>Maecenas sed ante pellentesque, posuere leo id, eleifend dolor. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Praesent laoreet malesuada cursus. Maecenas scelerisque congue eros eu posuere. Praesent in felis ut velit pretium lobortis rhoncus ut erat.</p>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+                
+        </tr>
+        
         <tr mc:hideable="" >
             
           <td class="two-column">
@@ -324,7 +350,41 @@
                     </td>
                     
         </tr>
-           </table>
+        <tr>
+        <td class="one-column">
+                    <table width="100%">
+                        <tr>
+                            <td class="inner contents">
+                                <a href="https://www.facebook.com/swooneditions" target="_blank">
+                                    <img src="http://d8mc86ikt33n0.cloudfront.net/facebook.png">
+                                </a>
+                                <a href="https://www.instagram.com/swooneditions/" target="_blank">
+                                    <img src="http://d8mc86ikt33n0.cloudfront.net/instagram.png">
+                                </a>
+                                <a href="https://uk.pinterest.com/swooneditions/" target="_blank">
+                                    <img src="http://d8mc86ikt33n0.cloudfront.net/pinterest.png">
+                                </a>
+                                <a href="https://twitter.com/swooneditions" target="_blank">
+                                    <img src="http://d8mc86ikt33n0.cloudfront.net/twitter.png">
+                                </a>
+                            </td>
+                        </tr>
+                    </table>
+        </td>
+   </tr>
+
+        <td class="one-column">
+                    <table width="100%">
+                        <tr>
+                            <td class="inner contents">
+                                <a mc:edit="preferences_button" href="*|UPDATE_PROFILE|*" class="button-long button-secondary">
+                                    Prefer weekly emails instead? Click here.
+                                </a>
+                             </td>
+                         </tr>
+                      </table>
+          </td>
+             </table>
             <!--[if (gte mso 9)|(IE)]>
             </td>
             </tr>
