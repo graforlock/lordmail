@@ -114,6 +114,23 @@ body {
     
 }
 
+.launch-prompt {
+    position: fixed;
+    top: 60%;
+    left: 50%;
+    padding: 5px 0;
+    font-family: Monaco, Inconsolata, Menlo, Courier;    
+    font-size: 14px;
+    border-radius: 5px;
+    color: lightseagreen;
+    font-weight: 100;
+    background: transparent;
+    border: 2px dashed gainsboro;
+    transform: translate(-50%, -60%);
+    z-index: 200;
+}
+
+
 .launch .sidebar div h5 select {
     float: right;
     border-radius: 0;

@@ -8,5 +8,11 @@ export default  {
       registerIntent(
         actions.LAUNCH_CREATOR, 
         payload(event))
+  },
+  getPrompt: function(event) {
+    registerIntent(
+      actiosn.GET_PROMPT,
+      payload(event)
+    )
   }
 } 

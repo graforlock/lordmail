@@ -17,6 +17,8 @@ export default mirror({
   RENDER_TEMPLATE: 
   'Renders the template according to the current builder schema model.',
   SEND_EMAIL:
+  'Sends a test email to preview.',
+  GET_PROMPT:
   'Sends a test email to preview.'
  /* ----------------- */
 });
