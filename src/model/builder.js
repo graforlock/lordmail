@@ -26,7 +26,7 @@ const renderTemplate = ({rows, mode, recipent = false}) => {
   
   // Build and send the template to render
   let {row, menu, social} = partials;
-  const createRows = compose(join, map(row)); //-->  Functional composition: Template each row (fn partially applied)
+  const createRows = compose(join, map(row)); //-->  Functional composition: Template each row (functor is partially applied)
   let precompiled = bundle(
       menu(mode),
       createRows(rows)
