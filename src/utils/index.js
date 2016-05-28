@@ -25,6 +25,9 @@ export const typeOf = (object) => {
     return {}.toString.call(object);
 }
 
+export const update = (state) => (property) => Object.assign(state, property);
+
+
 export const compose = (...fns) => (v) => fns.reverse().reduce((a,b) => b(a), v);
 
 export const partial = (fn)  => {

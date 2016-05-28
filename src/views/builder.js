@@ -43,7 +43,7 @@ class Builder extends Component {
         window.addEventListener('mousemove', this.dragMove.bind(this));
         setTimeout(() => {
             this.adjustFrameHeight();
-        },500)
+        },1000)
     }
     componentWillUnmount() {
         window.removeEventListener('mouseup', this.dragEnd.bind(this));

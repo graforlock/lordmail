@@ -11,7 +11,7 @@ export default  {
   },
   getPrompt: function(event) {
     registerIntent(
-      actiosn.GET_PROMPT,
+      actions.GET_PROMPT,
       payload(event)
     )
   }
