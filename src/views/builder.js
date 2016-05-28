@@ -94,10 +94,12 @@ class Builder extends Component {
         let rows = this.state.rows.map( (row, index) => {
            return  <Row index={index} key={index} onChange={this.onChange.bind(this)}/>
         });
+        let templateName = this.props.prompt ? this.props.prompt : Date.now();
         return (
             <div className={`launch ${show}`}>
                 <iframe width="977" height="1000" src="test.html"></iframe>
                 <aside onMouseDown={this.dragStart.bind(this)} className="sidebar">
+                    <div><h5>Template: {templateName}</h5></div>
                     <section id="drag-handle" className="drag-handle"></section>
                     <div ><h5>transactional<Toggle active={this.state.mode} onClick={this.activeMode.bind(this)} mode="trans"/></h5></div>
                     <div ><h5>menu<Toggle active={this.state.mode} onClick={this.activeMode.bind(this)} mode="menu"/></h5></div>
