@@ -86,7 +86,7 @@ body {
 
 
 .launch.true .sidebar {
-    transition: opacity 2.5s ease-in, height 2s linear, transform 2s linear;
+    transition: opacity 3s ease-in, height 1.75s linear, transform 1.75s linear;
     opacity: 1;
     height: 100%;
 
@@ -165,7 +165,7 @@ body {
 
 .launch.true div h5 {
     opacity: 1;
-    transition: opacity 1s ease-in;
+    transition: opacity .75s ease-in;
     transition-delay: 2.5s;
 }
 
