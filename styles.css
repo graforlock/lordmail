@@ -214,6 +214,7 @@ iframe {
     top: 0;
     left: 0;
     box-sizing: border-box;
+    min-height: 900px;
     max-width: 977px;
     margin: 0;
     pointer-events: none;

@@ -2,7 +2,7 @@
   "name": "mailord",
   "version": "1.0.0",
   "description": "React state container.",
-  "main": "index.js",
+  "main": "main.js",
   "scripts": {
     "start": "npm run lite && concurrently npm run babel ",
     "babel": "babel --watch src --out-dir dist ",
@@ -32,6 +32,7 @@
     "babel-preset-react": "^6.5.0",
     "babel-preset-stage-1": "^6.5.0",
     "concurrently": "^2.0.0",
+    "electron-prebuilt": "^1.2.0",
     "jspm": "^0.16.34",
     "lite-server": "^2.2.0",
     "react-addons-test-utils": "^15.0.2"
