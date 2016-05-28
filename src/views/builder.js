@@ -97,7 +97,7 @@ class Builder extends Component {
         let templateName = this.props.prompt || new Date().toDateString();
         return (
             <div className={`launch ${show}`}>
-                <iframe width="977" height="1000" src="test.html"></iframe>
+                <iframe width="600" height="1000" src="test.html"></iframe>
                 <aside onMouseDown={this.dragStart.bind(this)} className="sidebar">
                     <div><h5>Template: {templateName}</h5></div>
                     <hr/>
