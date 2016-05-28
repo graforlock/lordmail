@@ -26,7 +26,6 @@ const launchCreator = () => {
 
 const getPromptvalue = (prompt) => {
   updateState({prompt});
-
   state$ = emitState(_state);
   model.plug(state$);
 }
