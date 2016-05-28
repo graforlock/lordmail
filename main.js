@@ -13,7 +13,7 @@ function createWindow() {
   // Create the browser window.
   const server = require('./server.js');
   
-  win = new BrowserWindow({width: 800, height: 600});
+  win = new BrowserWindow({width: 900, height: 700});
   win.loadURL(`http://localhost:8080/`);
 
   // Open the DevTools.
