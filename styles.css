@@ -84,7 +84,6 @@ body {
     transform: translateY(50%);
 }
 
-
 .launch.true .sidebar {
     transition: opacity 3s ease-in, height 1.75s linear, transform 1.75s linear;
     opacity: 1;
@@ -131,6 +130,13 @@ body {
     z-index: 200;
 }
 
+#text-editor {
+    border-top: 1px solid gainsboro;
+}
+
+.no-bottom-margin {
+    margin-bottom: 0;
+}
 
 .launch .sidebar div h5 select {
     float: right;

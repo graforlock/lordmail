@@ -40,8 +40,10 @@
   },
   "jspm": {
     "dependencies": {
+      "codemirror": "npm:codemirror@^5.15.2",
       "jspm/nodelibs-fs": "github:jspm/nodelibs-fs@^0.1.2",
       "plugin-babel": "npm:systemjs-plugin-babel@^0.0.10",
+      "react-codemirror": "npm:react-codemirror@^0.2.6",
       "socket.io": "npm:socket.io@^1.4.6",
       "socket.io-client": "github:socketio/socket.io-client@^1.4.6"
     },

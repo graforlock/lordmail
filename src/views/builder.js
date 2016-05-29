@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import Toggle from './components/toggle';
+import TextEditor from './components/texteditor';
 import Row from './components/row';
 import {between} from '../utils/index';
 import render from '../actions/render-template';
@@ -43,7 +44,8 @@ class Builder extends Component {
         window.addEventListener('mousemove', this.dragMove.bind(this));
         setTimeout(() => {
             this.adjustFrameHeight();
-        },1000)
+        },1000);
+        
     }
     componentWillUnmount() {
         window.removeEventListener('mouseup', this.dragEnd.bind(this));
@@ -113,6 +115,7 @@ class Builder extends Component {
                         <button onClick={() => render.renderTemplate({rows: this.state.rows, mode: this.state.mode})} className="render-button">render</button>
                         <button onClick={this.sendEmail} className="render-button">send email</button>
                     </div>
+                    <TextEditor />
                 </aside>
             </div>      
         );
