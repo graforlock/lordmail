@@ -3,11 +3,8 @@ import codemirror from 'codemirror';
 import javascript from 'codemirror/mode/css/css';
 
 class TextEditor extends Component {
-    constructor() {
-        super();
-    }
-    handleValue(event) {
-        console.log(event.target.value);
+    constructor(props) {
+        super(props);
     }
     componentDidMount() {
        this.editor = codemirror.fromTextArea(document.getElementById('text-editor'), {
@@ -16,11 +13,8 @@ class TextEditor extends Component {
             mode:  "css"
         });
         this.editor.on("change", (editor, change) => {
-            console.log(this.editor.getValue());
+           this.props.onStyleEdit(this.editor.getValue());
         });
-    }
-    componentDidUpdate() {
-        console.log(this.editor.getValue());
     }
     render() {
         return (

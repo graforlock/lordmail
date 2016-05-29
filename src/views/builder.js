@@ -82,6 +82,19 @@ class Builder extends Component {
         rows[index].type = event.target.value;
         this.setState({rows})
     }
+    onStyleEdit(currentValue) {
+        let iframeContents = document.querySelector('iframe').contentWindow.document;
+        let editorStyles = iframeContents.getElementById('editor-styles');
+        if(editorStyles) {
+            editorStyles.innerHTML = "";
+            editorStyles.innerHTML = currentValue;
+        } else {
+            let editorStyles = document.createElement('style');
+            editorStyles.id = 'editor-styles';
+            editorStyles.innerHTML = currentValue;
+            iframeContents.body.appendChild(editorStyles);   
+        }
+    }
     sendEmail = (event) => {
         let address = prompt('Please enter your valid email address:'),
             regex = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
@@ -115,7 +128,7 @@ class Builder extends Component {
                         <button onClick={() => render.renderTemplate({rows: this.state.rows, mode: this.state.mode})} className="render-button">render</button>
                         <button onClick={this.sendEmail} className="render-button">send email</button>
                     </div>
-                    <TextEditor />
+                    <TextEditor onStyleEdit={this.onStyleEdit} />
                 </aside>
             </div>      
         );
