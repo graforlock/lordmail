@@ -20,7 +20,7 @@ class TextEditor extends Component {
         return (
             <div>
                 <hr className="no-bottom-margin"/>
-                <textarea id="text-editor" defaultValue="Styles editor..." className="text-editor" ></textarea>
+                <textarea id="text-editor" defaultValue="/* Custom Styles */" className="text-editor" ></textarea>
             </div>
         )    
     }

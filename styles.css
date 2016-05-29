@@ -85,7 +85,7 @@ body {
 }
 
 .launch.true .sidebar {
-    transition: opacity 3s ease-in, height 1.75s linear, transform 1.75s linear;
+    transition: opacity 2s ease-in, height 1.275s linear, transform 1.275s linear;
     opacity: 1;
     height: 100%;
 
@@ -172,7 +172,7 @@ body {
 .launch.true div h5 {
     opacity: 1;
     transition: opacity .75s ease-in;
-    transition-delay: 2.5s;
+    transition-delay: 2s;
 }
 
 .drag-handle {
@@ -213,8 +213,8 @@ body {
     border: 2px dashed lightseagreen;
     cursor: pointer;
     margin: 20px 35px;
-    transition: opacity 1s ease-in;
-    transition-delay: 2.5s;
+    transition: opacity .75s ease-in;
+    transition-delay: 2s;
 }
 iframe {
     position: absolute;
@@ -223,6 +223,7 @@ iframe {
     box-sizing: border-box;
     min-height: 900px;
     max-width: 977px;
+    padding: 10px;
     margin: 0;
     pointer-events: none;
     border: none;
