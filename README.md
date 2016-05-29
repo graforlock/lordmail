@@ -21,8 +21,9 @@ Main functionality:
  
 Secondary functionality:
 
-- Advanced Live styles editing
-- Hot reloading w/ Litmus feature for Outlook & the rest.
+- ~~Advanced Live styles editing~~
+- Option to save/include edited styles
+- Hot reloading w/ Litmus API feature for Outlook & the rest.
 - Advanced rows edition: Change of text content on the fly.
 - Advanced rows edition: MailChimp (hideable, repeatable, variants).
 - Option to copy the code into the clipboard.
