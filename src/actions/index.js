@@ -19,6 +19,6 @@ export default mirror({
   SEND_EMAIL:
   'Sends a test email to preview.',
   GET_PROMPT:
-  'Sends a test email to preview.'
+  'Gets user prompt and names template.'
  /* ----------------- */
 });
