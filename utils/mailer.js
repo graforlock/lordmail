@@ -1,14 +1,18 @@
+var CONSTANTS = require('../constants'),
+    EMAIL_CREDENTIALS = CONSTANTS.EMAIL_CREDENTIALS,
+    MC_API_KEY = CONSTANTS.MC_API_KEY;
+    
+
 var nodemailer = require('nodemailer'),
     CONFIG,
     transporter,
     mailOptions;
 
 CONFIG = Object.freeze({
-	user: '',
-	passwd: '',
+	user:  EMAIL_CREDENTIALS.user,
+	passwd: EMAIL_CREDENTIALS.passwd,
 	subject: '**Test Mail**'
 });
-
 
 transporter = nodemailer.createTransport({
     service: 'Gmail',
