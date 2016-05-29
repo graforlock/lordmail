@@ -1,15 +1,11 @@
-const mirror = (obj) => {
-    let o = {};
-    Object.keys(obj).forEach(key => {
-        o[key] = key;
-    });
-    return o;
-}
+import {mirror} from '../utils';
+
 /*
     Action Index.
     -------------
     Registers all the possible actions involved in the app state.
 */
+
 export default mirror({
  /* ----------------- */
   LAUNCH_CREATOR: 
