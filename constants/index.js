@@ -5,3 +5,5 @@ exports.EMAIL_CREDENTIALS = {
     passwd: ''
     
 };
+
+exports.LOCALHOST = 'http://localhost:8080/';

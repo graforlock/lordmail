@@ -11,9 +11,10 @@ let win;
 function createWindow() {
   // Create the browser window.
   const server = require('./server.js');
+  const LOCALHOST = require('./constants/index').LOCALHOST;
   
   win = new BrowserWindow({width: 900, height: 700});
-  win.loadURL(`http://localhost:8080/`);
+  win.loadURL(LOCALHOST);
 
   // Open the DevTools.
   // win.webContents.openDevTools();
