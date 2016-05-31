@@ -28,6 +28,11 @@ io.on('connection', function(socket) {
         fs.writeFileSync('test.html', layout, 'utf8');
         io.emit('created_template', {});
     })
+    socket.on('save_styles',function(styles) {
+	console.log(styles);
+	fs.writeFileSync('custom.css', styles, 'utf8');
+	io.emit('saved_styles');	
+    });
     socket.on('send_email', function(address) {
         exec('premailer test.html', function(error, output) {
           if(!error) {

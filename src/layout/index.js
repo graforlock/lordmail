@@ -15,7 +15,7 @@ export default {
             </style>
             <![endif]-->
             <link rel="stylesheet" href="framework.css" >
-            
+	    <link rel="stylesheet" href="custom.css" >            
     </head>
 <body>
     <center class="wrapper">

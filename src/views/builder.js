@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import CONSTANTS from '../../constants/index';
 import Toggle from './components/toggle';
 import TextEditor from './components/texteditor';
 import Row from './components/row';
@@ -12,7 +13,8 @@ class Builder extends Component {
         super(props);
         this.state = {
             rows: props.rows,
-            mode: props.mode
+            mode: props.mode,
+	    styleContent: ""
         }
     }
     addRow() {
@@ -36,7 +38,7 @@ class Builder extends Component {
         this.setState({mode: _modeState});
     }
     componentDidMount() {
-        this.socket = io.connect('http://localhost:8080');
+        this.socket = io.connect(CONSTANTS.LOCALHOST);
         this.socket.on('created_template', function() {
             document.querySelector('iframe').contentWindow.location.reload();                
         });   
@@ -94,6 +96,11 @@ class Builder extends Component {
             editorStyles.innerHTML = currentValue;
             iframeContents.body.appendChild(editorStyles);   
         }
+	this.setState({styleContents: currentValue});
+    }
+    saveStyles() {
+	console.log(this.state.styleContents);
+	this.socket.emit('save_styles',this.state.styleContents);
     }
     sendEmail = (event) => {
         let address = prompt('Please enter your valid email address:'),
@@ -127,8 +134,9 @@ class Builder extends Component {
                     <div >
                         <button onClick={() => render.renderTemplate({rows: this.state.rows, mode: this.state.mode})} className="render-button">render</button>
                         <button onClick={this.sendEmail} className="render-button">send email</button>
+                        <button onClick={this.saveStyles.bind(this)} className="render-button">save styles</button>
                     </div>
-                    <TextEditor onStyleEdit={this.onStyleEdit} />
+                    <TextEditor onStyleEdit={this.onStyleEdit.bind(this)} />
                 </aside>
             </div>      
         );
