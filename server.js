@@ -25,6 +25,11 @@ var server = app.listen('8080');
 var io = require('socket.io')(server);
 
 io.on('connection', function(socket) {
+
+    fs.readdir(__dirname + '/templates/', function(err,files) {
+        io.emit('template_list', files);
+    });
+    
     socket.on('build_template', function(layout) {
         fs.writeFile('test.html', layout, function(err) {
             if(err) throw err;
