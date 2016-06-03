@@ -3,7 +3,8 @@ var express = require('express'),
     bodyParser = require('body-parser'),
     app = express(),
     fs = require('fs'),
-    mailer = require('./utils/mailer');
+    mailer = require('./utils/mailer'),
+    premailer = require('./utils/premailer');
 
 require('shelljs/global');
 
@@ -25,15 +26,24 @@ var io = require('socket.io')(server);
 
 io.on('connection', function(socket) {
     socket.on('build_template', function(layout) {
-        fs.writeFileSync('test.html', layout, 'utf8');
-        io.emit('created_template', {});
+        fs.writeFile('test.html', layout, function(err) {
+            if(err) throw err;
+                // Make it a higher order function
+                exec('premailer test.html > ' + Math.random() * 100 + '.html', function(error, output) {
+                    if(!error) {
+                        io.emit('created_template', {});
+                    } else {
+                        console.warn('Errored with code ' + error);
+                    }
+                })
+        });
     })
     socket.on('save_styles',function(styles) {
-	console.log(styles);
-	fs.writeFileSync('custom.css', styles, 'utf8');
-	io.emit('saved_styles');	
+        fs.writeFileSync('custom.css', styles, 'utf8');
+        io.emit('saved_styles');	
     });
     socket.on('send_email', function(address) {
+        // Make it a higher order function
         exec('premailer test.html', function(error, output) {
           if(!error) {
               mailer.send(address, output);
