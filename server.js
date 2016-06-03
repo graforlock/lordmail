@@ -29,7 +29,7 @@ io.on('connection', function(socket) {
         fs.writeFile('test.html', layout, function(err) {
             if(err) throw err;
                 // Make it a higher order function
-                exec('premailer test.html > ' + Math.random() * 100 + '.html', function(error, output) {
+                exec('premailer test.html > '+ __dirname + '/templates/template.html', function(error, output) {
                     if(!error) {
                         io.emit('created_template', {});
                     } else {
