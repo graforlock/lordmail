@@ -178,7 +178,7 @@ body {
 .drag-handle {
     position: absolute;
     left: -3px;
-    width: 3px;
+    width: 10px;
     height: 100%;
     top: 0;
     background: transparent;
@@ -234,3 +234,39 @@ hr {
     border: none;
     border-bottom: 1px solid gainsboro;
 }
+
+.sidebar .template-list {
+    margin: 0 25px;
+    max-height: 100px;
+    overflow-y: scroll;
+}
+
+.sidebar .template-list h5.template-item {
+    display: inline-block;
+    min-width: 0 ;
+    margin: 5px;
+    border: 1px dashed gainsboro;
+    border-radius: 2px;
+    padding: 2px;
+    cursor: pointer;
+
+}
+
+.sidebar .CodeMirror {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  height: 0;
+  width: 100%;
+  transform: translateY(100%);
+  transition: transform 1s ease-in, height 1s ease-in;
+}
+
+.sidebar .editing .CodeMirror {
+  transform: translateY(0);
+  height: 100%;
+  transition: transform 1s ease-in, height 1s ease-in;
+
+}
+
+

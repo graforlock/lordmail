@@ -17,8 +17,9 @@ class TextEditor extends Component {
         });
     }
     render() {
+    let editingClass = this.props.editing ? 'editing' : '';
         return (
-            <div>
+            <div className={editingClass}>
                 <hr className="no-bottom-margin"/>
                 <textarea id="text-editor" defaultValue="/* Custom Styles */" className="text-editor" ></textarea>
             </div>

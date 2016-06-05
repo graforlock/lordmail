@@ -17,8 +17,17 @@ let _state = {
         trans: false,
         menu: false,
         weekly: false
-    }
+    },
+    templates: []
 };
+
+
+
+socket.on('template_list', data => {
+                    _state.templates = data;
+                    let state$ = emitState(_state);
+                    model.plug(state$);
+               })
 
 let state$ = emitState(_state);
 
@@ -46,7 +55,6 @@ const _parseContents = ({rows,mode}) => {
 const renderTemplate = ({data, destination}) => {
  
  let compiled = _parseContents(data);
-
   socket.emit('build_template', buildTemplate(compiled), destination)
 
   // Update the state:
@@ -70,7 +78,6 @@ const sendTemplate = ({data, address}) => {
 pool.onValue(x => {
   switch(x.type) {
     case actions.RENDER_TEMPLATE:
-      console.log(x.payload);
       renderTemplate(x.payload);
       break;
     case actions.SEND_EMAIL:

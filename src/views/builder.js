@@ -7,6 +7,8 @@ import {between} from '../utils/index';
 import render from '../actions/render-template';
 import email from '../actions/send-email';
 import io from 'socket.io-client';
+import TemplateList from './components/tpllist';
+
 
 class Builder extends Component {
     constructor(props) {
@@ -14,6 +16,8 @@ class Builder extends Component {
         this.state = {
             rows: props.rows,
             mode: props.mode,
+            templates: props.templates,
+            editing: false,
      	    styleContent: ""
         }
     }
@@ -102,6 +106,10 @@ class Builder extends Component {
 	console.log(this.state.styleContents);
 	this.socket.emit('save_styles',this.state.styleContents);
     }
+    editStyles = () => {
+        let editing = this.state.editing;
+        this.setState({editing: !editing});    
+    }
     sendEmail = (event) => {
         let address = prompt('Please enter your valid email address:'),
             regex = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
@@ -126,7 +134,7 @@ class Builder extends Component {
                     <section id="drag-handle" className="drag-handle"></section>
                     <div ><h5>transactional<Toggle active={this.state.mode} onClick={this.activeMode.bind(this)} mode="trans"/></h5></div>
                     <div ><h5>menu<Toggle active={this.state.mode} onClick={this.activeMode.bind(this)} mode="menu"/></h5></div>
-                    <div ><h5>weekly button<Toggle active={this.state.mode} onClick={this.activeMode.bind(this)} mode="weekly"/></h5></div>
+                    <div ><h5></h5></div>
                     <hr/>
                     <div onClick={this.addRow.bind(this)}><h5 className="add-row">add row</h5></div>
                     { rows }
@@ -134,9 +142,11 @@ class Builder extends Component {
                     <div >
                         <button onClick={() => render.renderTemplate({data: {rows: this.state.rows, mode: this.state.mode}, destination: templateName})} className="render-button">render</button>
                         <button onClick={this.sendEmail} className="render-button">send email</button>
+                        <button onClick={this.editStyles} className="render-button">edit styles</button>
                         <button onClick={this.saveStyles.bind(this)} className="render-button">save styles</button>
                     </div>
-                    <TextEditor onStyleEdit={this.onStyleEdit.bind(this)} />
+                    <TemplateList  templates={this.props.templates}/>
+                    <TextEditor editing={this.state.editing} onStyleEdit={this.onStyleEdit.bind(this)} />
                 </aside>
             </div>      
         );
