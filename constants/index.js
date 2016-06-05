@@ -6,4 +6,6 @@ exports.EMAIL_CREDENTIALS = {
     
 };
 
+exports.RENDER_PATH = 'test.html';
+
 exports.LOCALHOST = 'http://localhost:8080/';

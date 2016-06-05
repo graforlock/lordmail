@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import CONSTANTS from '../../constants/index';
+import {LOCALHOST} from '../../constants/index';
 import Toggle from './components/toggle';
 import TextEditor from './components/texteditor';
 import Row from './components/row';
@@ -14,7 +14,7 @@ class Builder extends Component {
         this.state = {
             rows: props.rows,
             mode: props.mode,
-	    styleContent: ""
+     	    styleContent: ""
         }
     }
     addRow() {
@@ -38,7 +38,7 @@ class Builder extends Component {
         this.setState({mode: _modeState});
     }
     componentDidMount() {
-        this.socket = io.connect(CONSTANTS.LOCALHOST);
+        this.socket = io.connect(LOCALHOST);
         this.socket.on('created_template', function() {
             document.querySelector('iframe').contentWindow.location.reload();                
         });   
@@ -106,7 +106,7 @@ class Builder extends Component {
         let address = prompt('Please enter your valid email address:'),
             regex = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
         if(regex.test(address)) {
-            email.sendEmail({rows: this.state.rows, recipent: address});
+            email.sendEmail({data: {rows: this.state.rows}, address});
         } else {
             alert('Invalid email address given: ' + address);
         }
@@ -132,7 +132,7 @@ class Builder extends Component {
                     { rows }
                     <hr/>
                     <div >
-                        <button onClick={() => render.renderTemplate({rows: this.state.rows, mode: this.state.mode})} className="render-button">render</button>
+                        <button onClick={() => render.renderTemplate({data: {rows: this.state.rows, mode: this.state.mode}, destination: templateName})} className="render-button">render</button>
                         <button onClick={this.sendEmail} className="render-button">send email</button>
                         <button onClick={this.saveStyles.bind(this)} className="render-button">save styles</button>
                     </div>

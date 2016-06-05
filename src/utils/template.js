@@ -2,6 +2,7 @@ import * as fs from 'fs';
 import layout from '../layout/index';
 import io from 'socket.io-client';
 import config from '../layout/config';
+import { LOCALHOST } from '../../constants/index';
 
 export const template = (tpl, data) => {
         let regex = /{{([^}}]+)?}}/g,
@@ -24,17 +25,12 @@ export const repeat = (times) =>  {
     }
 };
 
-export const buildTemplate = (content, recipent) => {
-    let _layout = `${layout.head}${content}${layout.footer}`;
-    const socket = io.connect('http://localhost:8080');
-    switch(recipent) {
-        case false: 
-            socket.emit('build_template', _layout);
-            break;
-       default: 
-            socket.emit('send_email', recipent);
-    }
+export const buildTemplate = (content) => {
+   return `${layout.head}
+             ${content}
+           ${layout.footer}`;
 }
+
 
 export const exportTemplate = (content, options) => {
     socket.emit('build_template', _layout);

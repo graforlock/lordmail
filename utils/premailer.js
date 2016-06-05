@@ -1,14 +1,17 @@
 require('shelljs/global');
 
-function premailer(callback, destination) {
-    const dest = destination || false;
-    return exec('premailer test.html', function(error, output) {
-        if(!error) {
-            callback();
-        } else {
-            console.warn('Errored with code ' + error);
-        }
-    })
+function premailer(filename) {
+   filename = filename || "";
+   return new Promise(function(resolve, reject) {
+        return exec('premailer ' + filename, function(error, output) {
+            if(error) {
+               reject(error); 
+            }
+
+            resolve(output);
+           
+        }); 
+  });
 }
 
 module.exports = premailer;

@@ -4,7 +4,8 @@ var express = require('express'),
     app = express(),
     fs = require('fs'),
     mailer = require('./utils/mailer'),
-    premailer = require('./utils/premailer');
+    premailer = require('./utils/premailer'),
+    RENDER_PATH = require('./constants/index').RENDER_PATH;
 
 require('shelljs/global');
 
@@ -26,38 +27,34 @@ var io = require('socket.io')(server);
 
 io.on('connection', function(socket) {
 
+    // List to render settings from the saved templates   
     fs.readdir(__dirname + '/templates/', function(err,files) {
         io.emit('template_list', files);
     });
     
-    socket.on('build_template', function(layout) {
+    socket.on('build_template', function(layout,filename) {
         fs.writeFile('test.html', layout, function(err) {
-            if(err) throw err;
                 // Make it a higher order function
-                exec('premailer test.html > '+ __dirname + '/templates/template.html', function(error, output) {
-                    if(!error) {
+                premailer(RENDER_PATH).then(output => {
+                    fs.writeFile(__dirname + '/template/' + filename, () => {
                         io.emit('created_template', {});
-                    } else {
-                        console.warn('Errored with code ' + error);
-                    }
-                })
-        });
-    })
+                    });
+                });
+         });
+    });
+
     socket.on('save_styles',function(styles) {
         fs.writeFileSync('custom.css', styles, 'utf8');
         io.emit('saved_styles');	
     });
+
     socket.on('send_email', function(address) {
-        // Make it a higher order function
-        exec('premailer test.html', function(error, output) {
-          if(!error) {
-              mailer.send(address, output);
-              io.emit('email_sent', {});
-          } else {
-              console.warn('Errored with code ' + error);
-          }
+        // Sends just the output (no writes)
+        premailer(RENDER_PATH).then(output => {
+            mailer.send(address, output);
+            io.emit('email_sent', {});
         })
-    })
+   })
 });
 
 
