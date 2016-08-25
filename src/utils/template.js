@@ -1,5 +1,5 @@
 import * as fs from 'fs';
-import layout from '../layout/index';
+import layout from '../layout/base-layout';
 import io from 'socket.io-client';
 
 export const template = (tpl, data) => {

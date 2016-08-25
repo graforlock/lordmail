@@ -7,6 +7,7 @@ import rsidebar from './rsidebar';
 import txtcol from './txtcol';
 import rzigzag from './rzigzag';
 import lzigzag from './lzigzag';
+import spacer from './spacer';
 
 export default {
     col1,
@@ -17,5 +18,6 @@ export default {
     rsidebar,
     rzigzag,
     lzigzag,
-    txtcol 
+    txtcol,
+    spacer
 }
