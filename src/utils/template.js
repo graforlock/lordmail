@@ -1,7 +1,6 @@
 import * as fs from 'fs';
 import layout from '../layout/index';
 import io from 'socket.io-client';
-import config from '../layout/config';
 
 export const template = (tpl, data) => {
         let regex = /{{([^}}]+)?}}/g,

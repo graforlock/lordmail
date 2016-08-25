@@ -13,7 +13,7 @@ function createWindow() {
   const server = require('./server.js');
   const LOCALHOST = require('./constants/index').LOCALHOST;
   
-  win = new BrowserWindow({width: 900, height: 700});
+  win = new BrowserWindow({width: 900, height: 700, useContentSize: true});
   win.loadURL(LOCALHOST);
 
   // Open the DevTools.

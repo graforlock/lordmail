@@ -56,8 +56,8 @@ class Builder extends Component {
     }
     dragMove(event) {
         if(this.dragging === true) {
-            this.target.currentTarget.style.width = ((window.innerWidth - event.screenX)) + 'px';
-            document.querySelector('iframe').width = event.screenX;
+            this.target.currentTarget.style.left = (event.pageX ) + 'px';
+            document.querySelector('iframe').width = (event.pageX ) + 'px';
             this.adjustFrameHeight();
         }
     }
@@ -65,7 +65,7 @@ class Builder extends Component {
         let ev = Object.assign({}, event);
         let target = ev.currentTarget;
         this.target = ev;
-        this.dragPoint = window.innerWidth - target.offsetWidth;
+        this.dragPoint = event.screenX;
         if(event.target.id === 'drag-handle') {
                 this.dragging = true;
         }
@@ -112,6 +112,7 @@ class Builder extends Component {
         let templateName = this.props.prompt || new Date().toDateString();
         return (
             <div className={`launch ${show}`}>
+                <p id='data' style={{position : 'fixed', top: 0, left: '50%', zIndex: 1000000}}></p>
                 <iframe width="600" height="1000" src="test.html"></iframe>
                 <aside onMouseDown={this.dragStart.bind(this)} className="sidebar">
                     <div><h5>Template: {templateName}</h5></div>
