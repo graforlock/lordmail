@@ -1,6 +1,6 @@
-var Sequelize = require('sequelize');
+const Sequelize = require('sequelize');
 
-var connection = new Sequelize('database', 'username', 'password', {
+const connection = new Sequelize('database', 'username', 'password', {
   // sqlite! now!
   dialect: 'sqlite',
  
