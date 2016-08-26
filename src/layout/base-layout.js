@@ -14,8 +14,8 @@ export default {
                 table {border-collapse: collapse;}
             </style>
             <![endif]-->
-            <link rel="stylesheet" href="framework.css" >
-            
+            <link rel="stylesheet" href="/custom.css" >            
+            <link rel="stylesheet" href="/framework.css" >
     </head>
 <body>
     <center class="wrapper">

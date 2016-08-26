@@ -3,7 +3,11 @@ const express = require('express'),
     bodyParser = require('body-parser'),
     app = express(),
     fs = require('fs'),
-    mailer = require('./utils/mailer');
+    mailer = require('./utils/mailer'),
+    premailer = require('./utils/premailer'),
+    RENDER_PATH = require('./constants/index').RENDER_PATH,
+    TEMPLATE_PATH = require('./constants/index').TEMPLATE_PATH;
+
 const db = require('./sqlite').db,
       model = require('./sqlite').model;
 
@@ -18,20 +22,37 @@ const server = app.listen('8080'),
       io = require('socket.io')(server);
 
 io.on('connection', function(socket) {
-    socket.on('build_template', function(layout) {
-        fs.writeFileSync('test.html', layout, 'utf8');
-        io.emit('created_template', {});
-    })
+
+    // List to render settings from the saved templates   
+    fs.readdir(__dirname + '/templates/', function(err,files) {
+        const junklessFiles = files.filter(file => file !== '.DS_Store');
+        io.emit('template_list', junklessFiles);
+    });
+    
+    socket.on('build_template', function(layout,filename) {
+        fs.writeFile('test.html', layout, function(err) {
+                // Make it a higher order function
+                premailer(RENDER_PATH).then(output => {
+                    fs.writeFile(TEMPLATE_PATH + filename + '.html', output, () => {
+                        io.emit('created_template', {});
+                    });
+                }).catch(error => console.warn(error));
+         });
+    });
+
+    socket.on('save_styles',function(styles) {
+        fs.writeFileSync('custom.css', styles, 'utf8');
+        io.emit('saved_styles');	
+    });
+
     socket.on('send_email', function(address) {
-        exec('premailer test.html', function(error, output) {
-        if(!error) {
+        // Sends just the output (no writes)
+        premailer(RENDER_PATH).then(output => {
             mailer.send(address, output);
             io.emit('email_sent', {});
-        } else {
-            console.warn('Errored with code ' + error);
-        }
-        })
-    })
+        }).catch(error =>  console.warn(error));
+   });
+
 });
 
 const Sqlite = db.sync().then(function() {

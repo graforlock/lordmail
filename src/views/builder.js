@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {LOCALHOST} from '../../constants/index';
 import Toggle from './components/toggle';
 import TextEditor from './components/texteditor';
 import Row from './components/row';
@@ -6,13 +7,18 @@ import {between} from '../utils/index';
 import render from '../actions/render-template';
 import email from '../actions/send-email';
 import io from 'socket.io-client';
+import TemplateList from './components/tpllist';
+
 
 class Builder extends Component {
     constructor(props) {
         super(props);
         this.state = {
             rows: props.rows,
-            mode: props.mode
+            mode: props.mode,
+            templates: props.templates,
+            editing: false,
+     	    styleContent: ""
         }
     }
     addRow() {
@@ -36,7 +42,7 @@ class Builder extends Component {
         this.setState({mode: _modeState});
     }
     componentDidMount() {
-        this.socket = io.connect('http://localhost:8080');
+        this.socket = io.connect(LOCALHOST);
         this.socket.on('created_template', function() {
             document.querySelector('iframe').contentWindow.location.reload();                
         });   
@@ -94,12 +100,21 @@ class Builder extends Component {
             editorStyles.innerHTML = currentValue;
             iframeContents.body.appendChild(editorStyles);   
         }
+	this.setState({styleContents: currentValue});
+    }
+    saveStyles() {
+	console.log(this.state.styleContents);
+	this.socket.emit('save_styles',this.state.styleContents);
+    }
+    editStyles = () => {
+        let editing = this.state.editing;
+        this.setState({editing: !editing});    
     }
     sendEmail = (event) => {
         let address = prompt('Please enter your valid email address:'),
             regex = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
         if(regex.test(address)) {
-            email.sendEmail({rows: this.state.rows, recipent: address});
+            email.sendEmail({data: {rows: this.state.rows}, address});
         } else {
             alert('Invalid email address given: ' + address);
         }
@@ -120,16 +135,19 @@ class Builder extends Component {
                     <section id="drag-handle" className="drag-handle"></section>
                     <div ><h5>transactional<Toggle active={this.state.mode} onClick={this.activeMode.bind(this)} mode="trans"/></h5></div>
                     <div ><h5>menu<Toggle active={this.state.mode} onClick={this.activeMode.bind(this)} mode="menu"/></h5></div>
-                    <div ><h5>weekly button<Toggle active={this.state.mode} onClick={this.activeMode.bind(this)} mode="weekly"/></h5></div>
+                    <div ><h5></h5></div>
                     <hr/>
                     <div onClick={this.addRow.bind(this)}><h5 className="add-row">add row</h5></div>
                     { rows }
                     <hr/>
                     <div >
-                        <button onClick={() => render.renderTemplate({rows: this.state.rows, mode: this.state.mode})} className="render-button">render</button>
+                        <button onClick={() => render.renderTemplate({data: {rows: this.state.rows, mode: this.state.mode}, destination: templateName})} className="render-button">render</button>
                         <button onClick={this.sendEmail} className="render-button">send email</button>
+                        <button onClick={this.editStyles} className="render-button">edit styles</button>
+                        <button onClick={this.saveStyles.bind(this)} className="render-button">save styles</button>
                     </div>
-                    <TextEditor onStyleEdit={this.onStyleEdit} />
+                    <TemplateList  templates={this.props.templates}/>
+                    <TextEditor editing={this.state.editing} onStyleEdit={this.onStyleEdit.bind(this)} />
                 </aside>
             </div>      
         );
