@@ -10,6 +10,7 @@ const express = require('express'),
 
 const db = require('./sqlite').db,
       model = require('./sqlite').model;
+let templates;
 
 require('shelljs/global');
 
@@ -22,21 +23,31 @@ const server = app.listen('8080'),
       io = require('socket.io')(server);
 
 io.on('connection', function(socket) {
-
-    // List to render settings from the saved templates   
-    fs.readdir(__dirname + '/templates/', function(err,files) {
-        const junklessFiles = files.filter(file => file !== '.DS_Store');
-        io.emit('template_list', junklessFiles);
-    });
     
-    socket.on('build_template', function(layout,filename) {
-        fs.writeFile('test.html', layout, function(err) {
+    if(!templates) {
+        // standalone function you can repeat
+        model.Templates.findAll().then(function(r) {
+            templates = templates ? templates : [];
+            for(let i = 0; i < r.length; i++) {
+                templates[i] = { [r[i].name] : r[i].content };
+            }
+            io.emit('template_list', templates);
+        });
+    } 
+    socket.on('build_template', function(layout, filename) {
+        fs.writeFile(RENDER_PATH, layout, function(err) {
                 // Make it a higher order function
                 premailer(RENDER_PATH).then(output => {
-                    fs.writeFile(TEMPLATE_PATH + filename + '.html', output, () => {
+                    model.Templates.upsert(
+                        {
+                            name: filename,
+                            content: output
+                        }
+                    ).then(function() {
                         io.emit('created_template', {});
                     });
-                }).catch(error => console.warn(error));
+                })
+                .catch(error => console.warn(error));
          });
     });
 

@@ -1,0 +1,14 @@
+const Sequelize = require('sequelize');
+
+const Templates = function(connection) { 
+        return connection.define("template", {
+                name: {
+                    type: Sequelize.STRING,
+                    unique: true
+                },
+                content: Sequelize.TEXT
+            }
+        )
+};
+
+module.exports = Templates;

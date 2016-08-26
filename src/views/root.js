@@ -5,7 +5,7 @@ import Builder from './builder';
 const Root = ({launched, prompt, builder: {rows, mode, templates}}) => {
     let overlayClass = launched || prompt ? 'main-overlay hide' : 'main-overlay',
         builderShow = launched  || prompt ? true : false;
-    console.log(templates);
+        console.log(templates);
     return (
         <section>     
             <Launch overlayClass={overlayClass}/>

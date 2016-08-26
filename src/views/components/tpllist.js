@@ -1,11 +1,12 @@
 import React from 'react';
 
 const TemplateList = ({templates}) => {
-    if(!templates.length) {
+    if(!templates) {
         return <li></li>;
     }
     let templateList = templates.map((template,index) => {
-        return <h5 className="template-item" key={index}>{template}</h5>;
+        let name = Object.keys(template)[0];
+        return <h5 className="template-item" key={index}>{name}</h5>;
     });
     return(
         <div> 

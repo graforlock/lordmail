@@ -7,7 +7,6 @@ function premailer(filename) {
             if(error) {
                reject(error); 
             }
-
             resolve(output);
            
         }); 

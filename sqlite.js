@@ -4,7 +4,8 @@ const db = require('./sqlite/index'),
 const Rows = require('./schema/rows')(db),
       DefaultCss = require('./schema/defaultcss')(db),
       Layout = require('./schema/base-layout')(db),
-      Options = require('./schema/options')(db);
+      Options = require('./schema/options')(db),
+      Templates = require('./schema/templates')(db);
       
 
 module.exports = {
@@ -13,6 +14,7 @@ module.exports = {
         Rows,
         DefaultCss,
         Layout,
-        Options
+        Options,
+        Templates
     }
 };

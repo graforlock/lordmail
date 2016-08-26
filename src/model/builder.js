@@ -22,19 +22,17 @@ let _state = {
 };
 
 
-
 socket.on('template_list', data => {
-                    _state.templates = data;
-                    let state$ = emitState(_state);
-                    model.plug(state$);
-               })
+            _state.templates = data;
+            let state$ = emitState(_state);
+            model.plug(state$);
+})
 
 let state$ = emitState(_state);
 
 model.plug(state$);
 
 const _parseContents = ({rows,mode}) => {
-  console.log(rows,mode);
   // Destructuring the partials  
   let {row, menu, social, button, spacer} = partials;
   

@@ -1,9 +1,8 @@
 import React, {Component} from 'react';
-import {LOCALHOST} from '../../constants/index';
+import {LOCALHOST, RENDER_PATH} from '../../constants/index';
 import Toggle from './components/toggle';
 import TextEditor from './components/texteditor';
 import Row from './components/row';
-import {between} from '../utils/index';
 import render from '../actions/render-template';
 import email from '../actions/send-email';
 import io from 'socket.io-client';
@@ -13,6 +12,7 @@ import TemplateList from './components/tpllist';
 class Builder extends Component {
     constructor(props) {
         super(props);
+        console.log(props);
         this.state = {
             rows: props.rows,
             mode: props.mode,
@@ -43,7 +43,7 @@ class Builder extends Component {
     }
     componentDidMount() {
         this.socket = io.connect(LOCALHOST);
-        this.socket.on('created_template', function() {
+        this.socket.on('created_template', function(res) {
             document.querySelector('iframe').contentWindow.location.reload();                
         });   
         window.addEventListener('mouseup', this.dragEnd.bind(this));
@@ -103,7 +103,6 @@ class Builder extends Component {
 	this.setState({styleContents: currentValue});
     }
     saveStyles() {
-	console.log(this.state.styleContents);
 	this.socket.emit('save_styles',this.state.styleContents);
     }
     editStyles = () => {
@@ -120,15 +119,18 @@ class Builder extends Component {
         }
     }
     render() {
-        let show = `${this.props.show}`;
-        let rows = this.state.rows.map( (row, index) => {
+        let show = `${this.props.show}`,
+            rows = this.state.rows.map( (row, index) => {
            return  <Row index={index} key={index} onChange={this.onChange.bind(this)}/>
         });
-        let templateName = this.props.prompt || new Date().toDateString();
+
+        let templates = this.props.templates ? this.props.templates : [],
+            templateName = this.props.prompt || new Date().toDateString();
+
         return (
             <div className={`launch ${show}`}>
                 <p id='data' style={{position : 'fixed', top: 0, left: '50%', zIndex: 1000000}}></p>
-                <iframe width="600" height="1000" src="test.html"></iframe>
+                <iframe width="600" height="1000" src={RENDER_PATH}></iframe>
                 <aside onMouseDown={this.dragStart.bind(this)} className="sidebar">
                     <div><h5>Template: {templateName}</h5></div>
                     <hr/>

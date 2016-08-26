@@ -8,6 +8,6 @@ exports.EMAIL_CREDENTIALS = {
 
 exports.TEMPLATE_PATH = './templates/';
 
-exports.RENDER_PATH = 'test.html';
+exports.RENDER_PATH = '_tmp.html';
 
 exports.LOCALHOST = 'http://localhost:8080/';
