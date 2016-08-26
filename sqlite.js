@@ -9,11 +9,26 @@ const connection = new Sequelize('database', 'username', 'password', {
   storage: 'database.sqlite'
 });
 
+const Header = '';
+const Footer = '';
+const Options = '';
+
 const Rows = connection.define("rows", {
-    name: Sequelize.STRING,
-    description: Sequelize.STRING,
-    content: Sequelize.STRING
-});
+        name: {
+            type: Sequelize.STRING,
+            primaryKey: true
+        },
+        description: Sequelize.STRING,
+        content: Sequelize.TEXT,
+        type: {
+            type: Sequelize.STRING,
+            defaultValue: 'common'
+        }
+    }, 
+    {
+        timestamps: false
+    }
+);
 
 connection.sync({
     logging: console.log
