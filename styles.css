@@ -203,16 +203,17 @@ body {
 }
 
 .render-button {
+    width: 45%;
     opacity: 0;
     font-family: Monaco, Inconsolata, Menlo, Courier; 
     font-size: 14px;
     color: lightseagreen;
     background: transparent;
-    padding: 5px 20px;
+    padding: 5px;
     border-radius: 15px;
     border: 2px dashed lightseagreen;
     cursor: pointer;
-    margin: 20px 35px;
+    margin: 2.5%;
     transition: opacity .75s ease-in;
     transition-delay: 2s;
 }

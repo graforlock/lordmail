@@ -6,7 +6,8 @@ const Templates = function(connection) {
                     type: Sequelize.STRING,
                     unique: true
                 },
-                content: Sequelize.TEXT
+                content: Sequelize.TEXT,
+                schema: Sequelize.TEXT
             }
         )
 };

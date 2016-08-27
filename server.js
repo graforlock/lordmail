@@ -34,14 +34,23 @@ io.on('connection', function(socket) {
             io.emit('template_list', templates);
         });
     } 
-    socket.on('build_template', function(layout, filename) {
+
+    socket.on('change_template', function(name) {
+        model.Templates.findOne({where: { name: name }})
+            .then(function(r) { 
+                io.emit('changed_template', {content: r.content, name: r.name, schema: r.schema} );
+            });
+    });
+
+    socket.on('build_template', function(layout, filename, schema) {
         fs.writeFile(RENDER_PATH, layout, function(err) {
                 // Make it a higher order function
                 premailer(RENDER_PATH).then(output => {
                     model.Templates.upsert(
                         {
                             name: filename,
-                            content: output
+                            content: output,
+                            schema: JSON.stringify(schema)
                         }
                     ).then(function() {
                         io.emit('created_template', {});

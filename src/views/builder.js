@@ -12,7 +12,6 @@ import TemplateList from './components/tpllist';
 class Builder extends Component {
     constructor(props) {
         super(props);
-        console.log(props);
         this.state = {
             rows: props.rows,
             mode: props.mode,
@@ -56,6 +55,11 @@ class Builder extends Component {
     componentWillUnmount() {
         window.removeEventListener('mouseup', this.dragEnd.bind(this));
         window.removeEventListener('mousemove', this.dragMove.bind(this));
+    }
+    componentWillReceiveProps({rows, mode}) {
+        if(rows && mode) {
+            this.setState({rows, mode});
+        }
     }
     dragEnd(event) {
         this.dragging = false;
@@ -102,8 +106,11 @@ class Builder extends Component {
         }
 	this.setState({styleContents: currentValue});
     }
+    onTemplateClick = (name) => {
+        this.socket.emit('change_template', name);
+    }
     saveStyles() {
-	this.socket.emit('save_styles',this.state.styleContents);
+        this.socket.emit('save_styles',this.state.styleContents);
     }
     editStyles = () => {
         let editing = this.state.editing;
@@ -148,7 +155,7 @@ class Builder extends Component {
                         <button onClick={this.editStyles} className="render-button">edit styles</button>
                         <button onClick={this.saveStyles.bind(this)} className="render-button">save styles</button>
                     </div>
-                    <TemplateList  templates={this.props.templates}/>
+                    <TemplateList  templates={this.props.templates} onTemplateClick={this.onTemplateClick} />
                     <TextEditor editing={this.state.editing} onStyleEdit={this.onStyleEdit.bind(this)} />
                 </aside>
             </div>      

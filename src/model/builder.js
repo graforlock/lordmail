@@ -22,12 +22,6 @@ let _state = {
 };
 
 
-socket.on('template_list', data => {
-            _state.templates = data;
-            let state$ = emitState(_state);
-            model.plug(state$);
-})
-
 let state$ = emitState(_state);
 
 model.plug(state$);
@@ -54,7 +48,7 @@ const _parseContents = ({rows,mode}) => {
 const renderTemplate = ({data, destination}) => {
  
  let compiled = _parseContents(data);
-  socket.emit('build_template', buildTemplate(compiled), destination)
+  socket.emit('build_template', buildTemplate(compiled), destination, {rows: _state.rows, mode: _state.mode})
 
   // Update the state:
   _state = data;
@@ -73,6 +67,20 @@ const sendTemplate = ({data, address}) => {
   state$ = emitState(_state);
   model.plug(state$);
 }
+
+socket.on('template_list', data => {
+    _state.templates = data;
+    let state$ = emitState(_state);
+    model.plug(state$);
+})
+
+socket.on('changed_template', ({schema}) => {
+    let parsedSchema = JSON.parse(schema);
+    _state.rows = parsedSchema.rows;
+    _state.mode = parsedSchema.mode;
+    let state$ = emitState(_state);
+    model.plug(state$);
+})
 
 pool.onValue(x => {
   switch(x.type) {
