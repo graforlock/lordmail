@@ -12,13 +12,8 @@ import builder from './builder';
 const global = Kefir
                  .combine([app, builder], 
                     ({launched, prompt}, builder) => 
-                      (
-                          {
-                              launched,
-                              prompt,
-                              builder
-                          }
-                      )
-                  );
+                      ({ launched,
+                         prompt,
+                         builder }));
                 
 export default global;

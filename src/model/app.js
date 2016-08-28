@@ -1,7 +1,6 @@
 import Kefir from 'kefir';
-import { pool, update }  from '../utils/index';
 import actions from '../actions/index';
-import { emitState } from '../utils/index';
+import { emitState, updateState } from '../utils/index';
 
 const App = {};
 const model = Kefir.pool();
@@ -11,21 +10,16 @@ let _state = {
     prompt: ''
 };
 
-const updateState = update(_state);
-
 let state$ = emitState(_state);
 model.plug(state$);
 
 App.launchCreator = () => {
-   updateState({ launched: !_state.launched });
-   state$ = emitState(_state);
-   model.plug(state$);
+   updateState(model, {state: _state, newState: { launched: !_state.launched }});
 }
 
 App.getPromptvalue = (prompt) => {
-  updateState({prompt});
-  state$ = emitState(_state);
-  model.plug(state$);
+  updateState(model, {state: _state, newState: {prompt}});
+
 }
 
 pool.onValue(x => {
