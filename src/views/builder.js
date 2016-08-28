@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {LOCALHOST, RENDER_PATH} from '../../constants/index';
+import {LOCALHOST, RENDER_PATH, VALID_MAIL} from '../../constants/index';
 import Toggle from './components/toggle';
 import TextEditor from './components/texteditor';
 import Row from './components/row';
@@ -118,7 +118,7 @@ class Builder extends Component {
     }
     sendEmail = (event) => {
         let address = prompt('Please enter your valid email address:'),
-            regex = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+            regex = VALID_MAIL;
         if(regex.test(address)) {
             email.sendEmail({data: {rows: this.state.rows}, address});
         } else {
@@ -128,7 +128,7 @@ class Builder extends Component {
     render() {
         let show = `${this.props.show}`,
             rows = this.state.rows.map( (row, index) => {
-           return  <Row index={index} key={index} onChange={this.onChange.bind(this)}/>
+           return  <Row index={index} key={index} row={row} onChange={this.onChange.bind(this)}/>
         });
 
         let templates = this.props.templates ? this.props.templates : [],
