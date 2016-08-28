@@ -1,15 +1,15 @@
 import Kefir from 'kefir';
-import { pool, compose, join, strconcat as bundle, map }  from '../utils/index';
+import { emitState, updateState, pool }  from '../utils/index';
+import { buildTemplate } from '../utils/template';
 import actions from '../actions/index';
-import { emitState } from '../utils/index';
+import parseContents from '../utils/parse-contents';
 import io from 'socket.io-client';
-import partials from '../layout/partials/index';
 import { LOCALHOST } from '../../constants/index';
-import contentTypes from '../layout/types/index';
-import { template, buildTemplate, emitData } from '../utils/template';
 
-const model = Kefir.pool();
 const socket = io.connect(LOCALHOST);
+
+const Builder = {};
+const model = Kefir.pool();
 
 let _state = {
     rows: [],
@@ -21,74 +21,59 @@ let _state = {
     templates: []
 };
 
-
 let state$ = emitState(_state);
-
 model.plug(state$);
 
-const _parseContents = ({rows,mode}) => {
-  // Destructuring the partials  
-  let {row, menu, social, button, spacer} = partials;
-  
-  // Build and send the template to render
-  const createRows = compose(join, map(row)); //-->  Functional composition: Template each row (functor is partially applied)
-  let precompiled = bundle(
-      menu(mode), // top section
-      createRows(rows), // content section
-      social, // bottom social section
-      button(mode) // bottom button section
-    );
-    
-  let compiled = template(precompiled, contentTypes);
+Builder.renderTemplate = ({data, destination}) => {
  
-  return compiled;  
+ let compiled = parseContents(data);
 
-}
-
-const renderTemplate = ({data, destination}) => {
- 
- let compiled = _parseContents(data);
-  socket.emit('build_template', buildTemplate(compiled), destination, {rows: _state.rows, mode: _state.mode})
+  socket.emit('build_template', buildTemplate(compiled), 
+                                destination, 
+                                {rows: _state.rows, mode: _state.mode})
 
   // Update the state:
-  _state = data;
-  state$ = emitState(_state);
-  model.plug(state$);
+  updateState(model, {state: _state, newState: data});
+
 }
 
-const sendTemplate = ({data, address}) => {
+Builder.sendTemplate = ({data, address}) => {
 
-  let compiled = _parseContents(data);
+  let compiled = parseContents(data);
  
-  socket.emit('send_email', buildTemplate(compiled), address)
+  socket.emit('send_email', buildTemplate(compiled), 
+                            address)
 
   // Update the state:
-  _state = data;
-  state$ = emitState(_state);
-  model.plug(state$);
+  updateState(model, {state: _state, newState: data});
+
 }
+
+// SERVICES HERE:
 
 socket.on('template_list', data => {
-    _state.templates = data;
-    let state$ = emitState(_state);
-    model.plug(state$);
+
+  updateState(model, {state: _state, newState: {templates: data}});
+
 })
 
 socket.on('changed_template', ({schema}) => {
-    let parsedSchema = JSON.parse(schema);
-    _state.rows = parsedSchema.rows;
-    _state.mode = parsedSchema.mode;
-    let state$ = emitState(_state);
-    model.plug(state$);
+    let parsedSchema = JSON.parse(schema),
+    {rows , mode} = parsedSchema;
+
+    updateState(model, {state: _state, newState: {rows, mode}});
+
 })
+
+// END OF SERVICES
 
 pool.onValue(x => {
   switch(x.type) {
     case actions.RENDER_TEMPLATE:
-      renderTemplate(x.payload);
+      Builder.renderTemplate(x.payload);
       break;
     case actions.SEND_EMAIL:
-      renderTemplate(x.payload);
+      Builder.renderTemplate(x.payload);
       break;
   }
 });

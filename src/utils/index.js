@@ -104,3 +104,10 @@ export const ajax$ = (options) => {
         });
     }).take(1).takeErrors(1).toProperty();
 }
+
+export const updateState = (model, {state, newState}) => {
+    let _state = {...state, ...newState},
+        state$ = emitState(_state);
+        console.log(_state);
+    model.plug(state$);
+}
