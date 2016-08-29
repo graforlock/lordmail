@@ -18,7 +18,6 @@ State.subscribe(function(state) {
   model.plug(state$);
 })
 
-
 const model = Kefir.pool(),
       Builder = builderProvider.getInstance(State);
 

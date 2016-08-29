@@ -26,8 +26,8 @@ export const builderProvider = Singleton(function(State) {
 
         },
         onTemplateList: () => {
-            socket.on('template_list', data => {
-                State.updateState({ data });
+            socket.on('template_list', templates => {
+                State.updateState({ templates });
             })
         },
         onChangedTemplate: () => {
