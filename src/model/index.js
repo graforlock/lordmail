@@ -9,8 +9,7 @@ import builder from './builder';
   This particular model/state container combines the latest change, combines this stream and feeds it to the view.
 */
 
-const global = Kefir
-                 .combine([app, builder], 
+const global = Kefir.combine([app, builder], 
                     ({launched, prompt}, builder) => 
                       ({ launched,
                          prompt,
