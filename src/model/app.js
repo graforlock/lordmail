@@ -1,26 +1,19 @@
 import Kefir from 'kefir';
 import actions from '../actions/index';
 import { emitState, updateState, pool } from '../utils/index';
-
-const App = {};
-const model = Kefir.pool();
+import { appProvider } from './providers/index';
 
 let _state = {
     launched: false,
     prompt: ''
 };
 
+const model = Kefir.pool(),
+      App = appProvider.getInstance({_state, model});
+
 let state$ = emitState(_state);
 model.plug(state$);
 
-App.launchCreator = () => {
-   updateState(model, {state: _state, newState: { launched: !_state.launched }});
-}
-
-App.getPromptvalue = (prompt) => {
-  updateState(model, {state: _state, newState: {prompt}});
-
-}
 
 pool.onValue(x => {
   switch(x.type) {

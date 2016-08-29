@@ -5,11 +5,9 @@ import actions from '../actions/index';
 import parseContents from '../utils/parse-contents';
 import io from 'socket.io-client';
 import { LOCALHOST } from '../../constants/index';
+import { builderProvider } from './providers/index.js';
 
 const socket = io.connect(LOCALHOST);
-
-const Builder = {};
-const model = Kefir.pool();
 
 let _state = {
     rows: [],
@@ -21,50 +19,17 @@ let _state = {
     templates: []
 };
 
+const model = Kefir.pool(),
+      Builder = builderProvider.getInstance({_state, model});
+
+
 let state$ = emitState(_state);
 model.plug(state$);
 
-Builder.renderTemplate = ({data, destination}) => {
- 
- let compiled = parseContents(data);
-
-  socket.emit('build_template', buildTemplate(compiled), 
-                                destination, 
-                                {rows: _state.rows, mode: _state.mode})
-
-  // Update the state:
-  updateState(model, {state: _state, newState: data});
-
-}
-
-Builder.sendTemplate = ({data, address}) => {
-
-  let compiled = parseContents(data);
- 
-  socket.emit('send_email', buildTemplate(compiled), 
-                            address)
-
-  // Update the state:
-  updateState(model, {state: _state, newState: data});
-
-}
 
 // SERVICES HERE:
-
-socket.on('template_list', data => {
-
-  updateState(model, {state: _state, newState: {templates: data}});
-
-})
-
-socket.on('changed_template', ({schema}) => {
-    let parsedSchema = JSON.parse(schema),
-    {rows , mode} = parsedSchema;
-
-    updateState(model, {state: _state, newState: {rows, mode}});
-
-})
-
+Builder.onTemplateList();
+Builder.onChangedTemplate();
 // END OF SERVICES
 
 pool.onValue(x => {
