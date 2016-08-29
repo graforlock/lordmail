@@ -8,59 +8,71 @@ import { LOCALHOST } from '../../../constants/index';
 
 const socket = io.connect(LOCALHOST);
 
-export const builderProvider = Singleton(function({ _state, model }) {
-    this._state = _state;
-    this.model = model;
+export const builderProvider = Singleton(function(State) {
+    this.state = State.state;
     return {
         renderTemplate: ({ data, destination }) => {
             let compiled = parseContents(data);
             socket.emit('build_template', buildTemplate(compiled),
-                destination, { rows: this._state.rows, mode: this._state.mode })
-            updateState(this.model, { state: this._state, newState: data });
+                destination, { rows: this.state.rows, mode: this.state.mode })
+            State.updateState({ data });
 
         },
         sendTemplate: ({ data, address }) => {
             let compiled = parseContents(data);
             socket.emit('send_email', buildTemplate(compiled),
                 address)
-            updateState(this.model, { state: this._state, newState: data });
+            State.updateState({ data });
 
         },
         onTemplateList: () => {
             socket.on('template_list', data => {
-                updateState(this.model, { state: this._state, newState: { templates: data } });
+                State.updateState({ data });
             })
         },
         onChangedTemplate: () => {
             socket.on('changed_template', ({ schema }) => {
                 let parsedSchema = JSON.parse(schema),
                     { rows, mode } = parsedSchema;
-                updateState(this.model, { state: this._state, newState: { rows, mode } });
-
+                State.updateState({ rows, mode });
             })
         }
 
     }
 });
 
-export const appProvider = Singleton(function({ _state, model }) {
-    this._state = _state;
-    this.model = model;
+export const appProvider = Singleton(function(State) {
+    this.state = State.state;
     return {
         launchCreator: () => {
-            updateState(model, { state: _state, newState: { launched: !_state.launched } });
+            State.updateState({ launched: !this.state.launched });
         },
         getPromptvalue: (prompt) => {
-            updateState(model, { state: _state, newState: { prompt } });
-
+            State.updateState({ prompt })
         }
     }
 });
 
 export const stateProvider = function(state) {
-   this.state = Observer(state); 
+   this.state = state;
+   this.subscribers = [];
 }
 
-stateProvider.prototype.subscribe = (subscriber) => {
-    this.state.subscribe(subscriber);
+stateProvider.prototype.updateState = function(newState) {
+    let _state = {...this.state, ...newState};
+    if(JSON.stringify(_state) !== JSON.stringify(this.state)) {
+        this.state = _state;
+        this.notify(_state);
+    }
+}
+
+stateProvider.prototype.notify = function(newState) {
+    newState = newState || this.state;
+    for(let i = 0; i < this.subscribers.length; i++) {
+        this.subscribers[i](newState);
+    }
+}
+
+stateProvider.prototype.subscribe = function(subscriber) {
+    this.subscribers.push(subscriber);
 }

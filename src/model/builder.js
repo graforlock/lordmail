@@ -13,22 +13,14 @@ const State = new stateProvider({
     templates: []
 });
 
-let _state = {
-    rows: [],
-    mode: {
-      trans: false,
-      menu: false,
-      weekly: false
-    },
-    templates: []
-};
+State.subscribe(function(state) {
+  let state$ = emitState(state);
+  model.plug(state$);
+})
+
 
 const model = Kefir.pool(),
-  Builder = builderProvider.getInstance({ _state, model });
-
-
-let state$ = emitState(_state);
-model.plug(state$);
+      Builder = builderProvider.getInstance(State);
 
 
 Builder.onTemplateList();

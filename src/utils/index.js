@@ -108,6 +108,5 @@ export const ajax$ = (options) => {
 export const updateState = (model, {state, newState}) => {
     let _state = {...state, ...newState},
         state$ = emitState(_state);
-        console.log(_state);
     model.plug(state$);
 }

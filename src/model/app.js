@@ -1,19 +1,22 @@
 import Kefir from 'kefir';
 import actions from '../actions/index';
 import { emitState, updateState, pool } from '../utils/index';
-import { appProvider } from './providers/index';
+import { appProvider, stateProvider } from './providers/index';
 
-let _state = {
+const State = new stateProvider({
     launched: false,
     prompt: ''
-};
+});
+
+State.subscribe(function(state) {
+  let state$ = emitState(state);
+  model.plug(state$);
+});
 
 const model = Kefir.pool(),
-    App = appProvider.getInstance({ _state, model });
+      App = appProvider.getInstance(State);
 
-let state$ = emitState(_state);
-model.plug(state$);
-
+State.notify();
 
 pool.onValue(x => {
     switch (x.type) {
