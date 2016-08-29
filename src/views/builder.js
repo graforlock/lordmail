@@ -6,7 +6,7 @@ import Row from './components/row';
 import render from '../actions/render-template';
 import email from '../actions/send-email';
 import io from 'socket.io-client';
-import TemplateList from './components/tpllist';
+import TemplateList from './components/template-list';
 
 
 class Builder extends Component {
