@@ -12,7 +12,6 @@ export const builderProvider = Singleton(function({ _state, model }) {
     this.model = model;
     return {
         renderTemplate: ({ data, destination }) => {
-
             let compiled = parseContents(data);
             socket.emit('build_template', buildTemplate(compiled),
                 destination, { rows: this._state.rows, mode: this._state.mode })
@@ -20,9 +19,7 @@ export const builderProvider = Singleton(function({ _state, model }) {
 
         },
         sendTemplate: ({ data, address }) => {
-
             let compiled = parseContents(data);
-
             socket.emit('send_email', buildTemplate(compiled),
                 address)
             updateState(this.model, { state: this._state, newState: data });
