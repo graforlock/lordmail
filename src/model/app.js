@@ -1,6 +1,6 @@
 import Kefir from 'kefir';
 import actions from '../actions/index';
-import { emitState, updateState } from '../utils/index';
+import { emitState, updateState, pool } from '../utils/index';
 
 const App = {};
 const model = Kefir.pool();
