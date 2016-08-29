@@ -9,21 +9,21 @@ let _state = {
 };
 
 const model = Kefir.pool(),
-      App = appProvider.getInstance({_state, model});
+    App = appProvider.getInstance({ _state, model });
 
 let state$ = emitState(_state);
 model.plug(state$);
 
 
 pool.onValue(x => {
-  switch(x.type) {
-    case actions.LAUNCH_CREATOR:
-      App.launchCreator();
-      break;
-    case actions.GET_PROMPT:
-      App.getPromptvalue(x.payload);
-      break;
-  }
+    switch (x.type) {
+        case actions.LAUNCH_CREATOR:
+            App.launchCreator();
+            break;
+        case actions.GET_PROMPT:
+            App.getPromptvalue(x.payload);
+            break;
+    }
 });
 
 export default model;

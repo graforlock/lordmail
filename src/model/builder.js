@@ -1,20 +1,20 @@
 import Kefir from 'kefir';
-import { emitState, pool }  from '../utils/index';
+import { emitState, pool } from '../utils/index';
 import actions from '../actions/index';
 import { builderProvider } from './providers/index.js';
 
 let _state = {
-    rows: [],
-    mode: {
-        trans: false,
-        menu: false,
-        weekly: false
-    },
-    templates: []
+  rows: [],
+  mode: {
+    trans: false,
+    menu: false,
+    weekly: false
+  },
+  templates: []
 };
 
 const model = Kefir.pool(),
-      Builder = builderProvider.getInstance({_state, model});
+  Builder = builderProvider.getInstance({ _state, model });
 
 
 let state$ = emitState(_state);
@@ -26,7 +26,7 @@ Builder.onChangedTemplate();
 
 
 pool.onValue(x => {
-  switch(x.type) {
+  switch (x.type) {
     case actions.RENDER_TEMPLATE:
       Builder.renderTemplate(x.payload);
       break;

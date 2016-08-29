@@ -1,10 +1,10 @@
 export const Singleton = (Instance) => {
-    return (() => {  
+    return (() => {
         var instance,
             module = Instance;
         return {
             getInstance: (options) => {
-                if(!instance) {
+                if (!instance) {
                     instance = new module(options);
                 }
                 return instance;
