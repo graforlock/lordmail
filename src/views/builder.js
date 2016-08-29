@@ -144,7 +144,6 @@ class Builder extends Component {
                     <section id="drag-handle" className="drag-handle"></section>
                     <div ><h5>transactional<Toggle active={this.state.mode} onClick={this.activeMode.bind(this)} mode="trans"/></h5></div>
                     <div ><h5>menu<Toggle active={this.state.mode} onClick={this.activeMode.bind(this)} mode="menu"/></h5></div>
-                    <div ><h5></h5></div>
                     <hr/>
                     <div onClick={this.addRow.bind(this)}><h5 className="add-row">add row</h5></div>
                     { rows }
