@@ -1,16 +1,26 @@
 import Kefir from 'kefir';
 import { emitState, pool } from '../utils/index';
 import actions from '../actions/index';
-import { builderProvider } from './providers/index.js';
+import { builderProvider, stateProvider } from './providers/index.js';
+
+const State = new stateProvider({
+    rows: [],
+    mode: {
+      trans: false,
+      menu: false,
+      weekly: false
+    },
+    templates: []
+});
 
 let _state = {
-  rows: [],
-  mode: {
-    trans: false,
-    menu: false,
-    weekly: false
-  },
-  templates: []
+    rows: [],
+    mode: {
+      trans: false,
+      menu: false,
+      weekly: false
+    },
+    templates: []
 };
 
 const model = Kefir.pool(),
