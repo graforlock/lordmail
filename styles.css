@@ -251,6 +251,8 @@ iframe {
     pointer-events: none;
     border: none;
     z-index: 0;
+
+    border: 10px solid ghostwhite;
 }
 
 hr {
