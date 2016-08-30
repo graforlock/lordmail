@@ -5,9 +5,9 @@ import { registerIntent, payload  } from '../utils/index';
 
 export default  {
   launchCreator: function(event) {
-      registerIntent(
-        actions.LAUNCH_CREATOR, 
-        payload(event))
+    registerIntent(
+      actions.LAUNCH_CREATOR, 
+      payload(event))
   },
   getPrompt: function(event) {
     registerIntent(

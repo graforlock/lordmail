@@ -134,7 +134,6 @@ class Builder extends Component {
         }
     }
     render() {
-        console.log(this.props.rows);
         let rows = this.props.rows.map( (row, index) => {
                 if(index < this.props.rows.length) {
                     return  <Row index={index} key={index} row={row} onChange={this.onChange.bind(this)}/>
