@@ -1,8 +1,20 @@
-const Sequelize = require('sequelize');
+const db = require('./sqlite'),
+      fs = require('fs');
 
-const connection = new Sequelize('database', 'username', 'password', {
-  dialect: 'sqlite',
-  storage: 'database.sqlite'
-});
+const Rows = require('../schema/rows')(db),
+      DefaultCss = require('../schema/defaultcss')(db),
+      Layout = require('../schema/base-layout')(db),
+      Options = require('../schema/options')(db),
+      Templates = require('../schema/templates')(db);
+      
 
-module.exports = connection;
+module.exports = {
+    db,
+    model: {
+        Rows,
+        DefaultCss,
+        Layout,
+        Options,
+        Templates
+    }
+};
