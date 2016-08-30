@@ -135,7 +135,7 @@ class Builder extends Component {
             templateName = this.props.prompt || new Date().toDateString();
 
         return (
-            <div className={`launch ${show}`}>
+            <section className={`launch ${show}`}>
                 <p id='data' style={{position : 'fixed', top: 0, left: '50%', zIndex: 1000000}}></p>
                 <iframe width="600" height="1000" src={RENDER_PATH}></iframe>
                 <aside onMouseDown={this.dragStart.bind(this)} className="sidebar">
@@ -157,7 +157,7 @@ class Builder extends Component {
                     <TemplateList  templates={this.props.templates} onTemplateClick={this.onTemplateClick} />
                     <TextEditor editing={this.state.editing} onStyleEdit={this.onStyleEdit.bind(this)} />
                 </aside>
-            </div>      
+            </section>      
         );
         
     }

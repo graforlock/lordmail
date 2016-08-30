@@ -16,8 +16,6 @@ export default ({rows,mode}) => {
       button(mode) // bottom button section
     );
     
-  let compiled = template(precompiled, contentTypes);
- 
-  return compiled;  
+  return template(precompiled, contentTypes);
 
 }
