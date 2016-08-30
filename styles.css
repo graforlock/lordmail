@@ -260,7 +260,7 @@ hr {
 
 .sidebar .template-list {
     margin: 0 25px;
-    max-height: 100px;
+    max-height: 250px;
     overflow-y: scroll;
 }
 
