@@ -7,6 +7,8 @@ export default mirror({
   'Launches the app.',
   RENDER_TEMPLATE: 
   'Renders the template according to the current builder schema model.',
+  UPDATE_SCHEMA: 
+  'Updates rows and mode.',
   SEND_EMAIL:
   'Sends a test email to preview.',
   GET_PROMPT:

@@ -19,10 +19,6 @@ class Builder extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            //rows and mode should be in state container 
-            rows: props.rows,
-            mode: props.mode,
-            // 
             templates: props.templates,
             editing: false,
      	    styleContent: "",
@@ -45,11 +41,6 @@ class Builder extends Component {
     componentWillUnmount() {
         window.removeEventListener('mouseup', this.dragEnd.bind(this));
         window.removeEventListener('mousemove', this.dragMove.bind(this));
-    }
-    componentWillReceiveProps({rows, mode}) {
-        if(rows && mode) {
-            this.setState({rows, mode});
-        }
     }
     //-> 2). Unbound parent methods :
     dragEnd(event) {
@@ -79,9 +70,9 @@ class Builder extends Component {
     onChange(event, index) {
         if(event.target.value === 'select') return;
         
-        let rows = this.state.rows;
+        let rows = this.props.rows;
         rows[index].type = event.target.value;
-        this.setState({rows})
+        render.updateSchema({rows, mode: this.props.mode});
     }
     onStyleEdit(currentValue) {
         let iframeContents = document.querySelector('iframe').contentWindow.document;
@@ -99,12 +90,12 @@ class Builder extends Component {
     }
     //-> 3). Bound parent methods :
     addRow = () => {
-        let rows = this.state.rows;
+        let rows = this.props.rows;
         rows.push({});
-        this.setState({rows});
+        render.updateSchema({mode: this.props.mode, rows});
     }
     activeMode = (mode) => {
-        let _modeState = this.state.mode;
+        let _modeState = this.props.mode;
         switch(mode) {
             case 'trans':
                 _modeState.trans = !_modeState[mode];
@@ -116,7 +107,7 @@ class Builder extends Component {
                 _modeState.weekly= !_modeState[mode];
                 break;
         }
-        this.setState({mode: _modeState});
+        render.updateSchema({rows : this.props.rows, mode: _modeState});
     }
     onTemplateClick = (name) => {
         this.socket.emit('change_template', name);
@@ -127,7 +118,7 @@ class Builder extends Component {
     }
     renderTemplate = () => {
         let templateName = this.state.name || new Date().toDateString();
-        render.renderTemplate({data: {rows: this.state.rows, mode: this.state.mode}, destination: templateName})
+        render.renderTemplate({data: {rows: this.props.rows, mode: this.props.mode}, destination: templateName})
     }
     editStyles = () => {
         let editing = this.state.editing;
@@ -137,12 +128,13 @@ class Builder extends Component {
         let address = prompt('Please enter your valid email address:'),
             regex = VALID_MAIL;
         if(regex.test(address)) {
-            email.sendEmail({data: {rows: this.state.rows}, address});
+            email.sendEmail({data: {rows: this.props.rows}, address});
         } else {
             alert('Invalid email address given: ' + address);
         }
     }
     render() {
+        console.log(this.props.rows);
         let rows = this.props.rows.map( (row, index) => {
                 if(index < this.props.rows.length) {
                     return  <Row index={index} key={index} row={row} onChange={this.onChange.bind(this)}/>
@@ -161,7 +153,7 @@ class Builder extends Component {
                 <aside onMouseDown={this.dragStart.bind(this)} className="sidebar">
                     <Caption name={templateName} />
                     <section id="drag-handle" className="drag-handle"></section>
-                    <ModeBlock mode={this.state.mode} activeMode={this.activeMode} />
+                    <ModeBlock mode={this.props.mode} activeMode={this.activeMode} />
                     <AddRow addRow={this.addRow} />
                     { rows }
                     <ButtonBlock saveStyles={this.saveStyles} renderTemplate={this.renderTemplate} 

@@ -25,6 +25,9 @@ export const builderProvider = Singleton(function(State) {
             State.updateState({ data });
 
         },
+        updateSchema: ({rows, mode}) => {
+            State.updateState({rows, mode});
+        },
         onTemplateList: () => {
             socket.on('template_list', templates => {
                 State.updateState({ templates });
@@ -60,7 +63,7 @@ export const stateProvider = function(state) {
 
 stateProvider.prototype.updateState = function(newState) {
     let _state = {...this.state, ...newState};
-    if(JSON.stringify(_state) !== JSON.stringify(this.state)) {
+    if(_state !== this.state) {
         this.state = _state;
         this.notify(_state);
     }
