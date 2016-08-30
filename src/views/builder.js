@@ -167,7 +167,8 @@ class Builder extends Component {
                     <TemplateList  templates={this.props.templates} 
                                    onTemplateClick={this.onTemplateClick} />
                     <TextEditor editing={this.state.editing} 
-                                onStyleEdit={this.onStyleEdit.bind(this)} />
+                                onStyleEdit={this.onStyleEdit.bind(this)} 
+                                editStyles={this.editStyles}/>
                 </aside>
             </section>      
         );

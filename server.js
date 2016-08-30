@@ -75,7 +75,7 @@ io.on('connection', function(socket) {
 
 });
 
-const Sqlite = db.sync().then(function() {
+db.sync().then(function() {
     return model.DefaultCss.findOne().then(function(rec) {
         var css = fs.createWriteStream('./css/default.css');
         css.write(rec.css);

@@ -217,6 +217,28 @@ body {
     transition: opacity .75s ease-in;
     transition-delay: 2s;
 }
+
+.close-styles {
+    position: fixed;
+    bottom: 20px;
+    right: 0;
+    z-index: 10000;
+    transform: translateY(50px);
+    -webkit-transform: translateY(50px);
+    -webkit-transition: transform .25s linear;
+    -moz-transition: transform .25s linear;
+    transition: transform .25s linear;
+}
+
+.close-styles.editing {
+    transform: translateY(0px);
+    -webkit-transform: translateY(0px);
+    -webkit-transition: transform .25s linear;
+    -moz-transition: transform .25s linear;
+    transition: transform .25s linear;
+    
+}
+
 iframe {
     position: absolute;
     top: 0;
