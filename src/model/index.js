@@ -4,6 +4,7 @@ import actions from '../actions/index';
 import { builderProvider, stateProvider, appProvider } from './providers/index.js';
 
 const State = new stateProvider({
+    //-> Initial App {state} :
     rows: [],
     mode: {
       trans: false,
@@ -16,6 +17,7 @@ const State = new stateProvider({
 });
 
 State.subscribe(function(state) {
+  //-> Streamline {state} to the App :
   let state$ = emitState(state);
   model.plug(state$);
 })
@@ -24,7 +26,7 @@ const model = Kefir.pool(),
       Builder = builderProvider.getInstance(State),
       App = appProvider.getInstance(State);
 
-//-> Web sockets listeners :
+//-> WebSockets listeners :
 Builder.onTemplateList();
 Builder.onChangedTemplate();
 

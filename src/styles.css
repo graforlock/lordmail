@@ -1,0 +1,296 @@
+body {
+    font-family: Monaco, Inconsolata, Menlo, Courier;    
+}
+
+*:focus {
+    outline: none;
+}
+
+.main-overlay {
+    opacity: 1;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    text-align: center;
+    background: #f7f7f7;
+    transition: opacity .75s ease-in;
+    background-image: url('img/background.png');
+    background-size: cover;
+    z-index: 50;
+}
+
+.main-overlay.hide {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity .75s ease-in, visibility .1s linear;
+    transition-delay: 0s, .75s;
+    
+}
+
+
+.main-overlay button {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: inline-block;
+    padding: 10px;
+    border-radius: 5px;
+    border: 2px dashed lightseagreen;
+    
+    z-index: 500;
+
+    color: lightseagreen;
+    font-size: 22px;
+    background: transparent;
+    cursor: pointer;
+    font-family: Monaco, Inconsolata, Menlo, Courier;
+
+    transition:background 1.5s ease-in, padding-top 1s ease-in;
+}
+
+.main-overlay button:hover {
+        background: white;
+        transition: background .5s ease-in;
+}
+  
+.main-overlay button:hover span:first-child {
+    top: -150px;
+    transition: top 1.5s linear;
+}
+
+.main-overlay small {
+    position: fixed;
+    bottom: 0;
+    margin: 0 auto;
+    left: 0;
+    right: 0;
+}
+
+.launch .sidebar {
+    position: fixed;
+    right: 0;
+    width: 100%;
+    height: 0%;
+    width: 300px;
+    min-width: 15px;
+    top: 0;
+    border-left: 3px solid gainsboro;
+    background: white;
+    opacity: 0;
+    padding-top: 20px;
+    transform: translateY(50%);
+}
+
+.launch.true .sidebar {
+    transition: opacity 2s ease-in, height 1.275s linear, transform 1.275s linear;
+    opacity: 1;
+    height: 100%;
+
+    transform: translateY(0);
+
+}
+
+.launch .sidebar div h5 {
+    margin: 20px 35px 20px 35px;
+    opacity: 0;
+    text-align: left;
+    font-weight: 100;
+    color: gray;
+    min-width: 225px;
+}
+
+.launch .sidebar div h5 span {
+    border: 1px solid gainsboro;
+    background: gainsboro;
+    border-radius: 10px;
+    height: 20px;
+    width: 40px;
+    display: inline-block;
+    float: right;
+    cursor: pointer;
+    
+}
+
+.launch-prompt {
+    position: fixed;
+    top: 60%;
+    left: 50%;
+    padding: 5px 0;
+    font-family: Monaco, Inconsolata, Menlo, Courier;    
+    font-size: 14px;
+    border-radius: 5px;
+    color: lightseagreen;
+    font-weight: 100;
+    background: transparent;
+    border: 2px dashed gainsboro;
+    transform: translate(-50%, -60%);
+    z-index: 200;
+}
+
+#text-editor {
+    border-top: 1px solid gainsboro;
+}
+
+.no-bottom-margin {
+    margin-bottom: 0;
+}
+
+.launch .sidebar div h5 select {
+    float: right;
+    border-radius: 0;
+    border: 1px solid gainsboro;
+    color: gray;
+}
+
+.launch .sidebar div h5 span:before,
+.launch .sidebar div h5 span.active:before {
+    content: "No";
+    font-size: 8px;
+    color: gray;
+    box-sizing: border-box;
+    text-align: center;
+    line-height: 8px;
+    padding-top: 4.75px;
+    display: inline-block;
+    border-radius: 100%;
+    background: white;
+    height: 20px;
+    width: 20px;
+    vertical-align: middle;
+
+}
+
+.launch .sidebar div h5 span.active:before {
+    content: "Yes";
+    float: right;
+}
+
+
+.launch.true div h5 {
+    opacity: 1;
+    transition: opacity .75s ease-in;
+    transition-delay: 2s;
+}
+
+.drag-handle {
+    position: absolute;
+    left: -3px;
+    width: 10px;
+    height: 100%;
+    top: 0;
+    background: transparent;
+    cursor: ew-resize;
+}
+
+.add-row:after {
+    content: "+";
+    border-radius: 100%;
+    border: 1px solid gainsboro;
+    height: 20px;
+    width: 20px;
+    text-align: center;
+    font-size: 14px;
+    float: right;
+    cursor: pointer;
+}
+
+.launch.true .render-button {
+    opacity: 1;
+    
+}
+
+.render-button {
+    width: 45%;
+    opacity: 0;
+    font-family: Monaco, Inconsolata, Menlo, Courier; 
+    font-size: 14px;
+    color: lightseagreen;
+    background: transparent;
+    padding: 5px;
+    border-radius: 15px;
+    border: 2px dashed lightseagreen;
+    cursor: pointer;
+    margin: 2.5%;
+    transition: opacity .75s ease-in;
+    transition-delay: 2s;
+}
+
+.close-styles {
+    position: fixed;
+    bottom: 20px;
+    right: 0;
+    z-index: 10000;
+    transform: translateY(50px);
+    -webkit-transform: translateY(50px);
+    -webkit-transition: transform .25s linear;
+    -moz-transition: transform .25s linear;
+    transition: transform .25s linear;
+}
+
+.close-styles.editing {
+    transform: translateY(0px);
+    -webkit-transform: translateY(0px);
+    -webkit-transition: transform .25s linear;
+    -moz-transition: transform .25s linear;
+    transition: transform .25s linear;
+    
+}
+
+iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    box-sizing: border-box;
+    min-height: 900px;
+    max-width: 977px;
+    padding: 10px;
+    margin: 0;
+    pointer-events: none;
+    border: none;
+    z-index: 0;
+
+}
+
+hr {
+    border: none;
+    border-bottom: 1px solid gainsboro;
+}
+
+.sidebar .template-list {
+    margin: 0 25px;
+    max-height: 250px;
+    overflow-y: scroll;
+}
+
+.sidebar .template-list h5.template-item {
+    display: inline-block;
+    min-width: 0 ;
+    margin: 5px;
+    border: 1px dashed gainsboro;
+    border-radius: 2px;
+    padding: 2px;
+    cursor: pointer;
+
+}
+
+.sidebar .CodeMirror {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  height: 0;
+  width: 100%;
+  transform: translateY(100%);
+  transition: transform 1s ease-in, height 1s ease-in;
+}
+
+.sidebar .editing .CodeMirror {
+  transform: translateY(0);
+  height: 100%;
+  transition: transform 1s ease-in, height 1s ease-in;
+
+}
+
+

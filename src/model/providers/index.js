@@ -57,6 +57,7 @@ export const appProvider = Singleton(function(State) {
 });
 
 export const stateProvider = function(state) {
+    //-> stateProvider is a simplified Subject of Observer :
    this.state = state;
    this.subscribers = [];
 }
@@ -77,5 +78,6 @@ stateProvider.prototype.notify = function(newState) {
 }
 
 stateProvider.prototype.subscribe = function(subscriber) {
+    //-> Observer(s) subscription :
     this.subscribers.push(subscriber);
 }
