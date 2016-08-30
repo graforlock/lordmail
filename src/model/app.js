@@ -16,7 +16,7 @@ State.subscribe(function(state) {
 const model = Kefir.pool(),
       App = appProvider.getInstance(State);
 
-// Start the App (initial step)
+//-> Start the App (init step)
 State.notify();
 
 pool.onValue(x => {

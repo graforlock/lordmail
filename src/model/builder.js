@@ -21,7 +21,7 @@ State.subscribe(function(state) {
 const model = Kefir.pool(),
       Builder = builderProvider.getInstance(State);
 
-//Web sockets listeners
+//-> Web sockets listeners :
 Builder.onTemplateList();
 Builder.onChangedTemplate();
 
