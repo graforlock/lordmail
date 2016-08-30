@@ -23,7 +23,8 @@ class Builder extends Component {
             mode: props.mode,
             templates: props.templates,
             editing: false,
-     	    styleContent: ""
+     	    styleContent: "",
+            name: props.prompt
         }
     }
     //-> 1). Lifecycle methods :
@@ -117,12 +118,13 @@ class Builder extends Component {
     }
     onTemplateClick = (name) => {
         this.socket.emit('change_template', name);
+        this.setState({name});
     }
     saveStyles = () => {
         this.socket.emit('save_styles',this.state.styleContents);
     }
     renderTemplate = () => {
-        let templateName = this.props.prompt || new Date().toDateString();
+        let templateName = this.state.name || new Date().toDateString();
         render.renderTemplate({data: {rows: this.state.rows, mode: this.state.mode}, destination: templateName})
     }
     editStyles = () => {
@@ -139,8 +141,7 @@ class Builder extends Component {
         }
     }
     render() {
-        let show = `${this.props.show}`,
-            rows = this.state.rows.map( (row, index) => {
+        let rows = this.state.rows.map( (row, index) => {
                 if(index < this.state.rows.length) {
                     return  <Row index={index} key={index} row={row} onChange={this.onChange.bind(this)}/>
                 } else {
@@ -149,10 +150,10 @@ class Builder extends Component {
             });
 
         let templates = this.props.templates ? this.props.templates : [],
-            templateName = this.props.prompt || new Date().toDateString();
-            
+            templateName = this.state.name || new Date().toDateString();
+
         return (
-            <section className={`launch ${show}`}>
+            <section className={`launch true`}>
                 <p id='data' style={{position : 'fixed', top: 0, left: '50%', zIndex: 1000000}}></p>
                 <iframe width="600" height="1000" src={RENDER_PATH}></iframe>
                 <aside onMouseDown={this.dragStart.bind(this)} className="sidebar">

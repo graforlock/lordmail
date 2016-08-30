@@ -8,7 +8,7 @@ const Root = ({launched, prompt, builder: {rows, mode, templates}}) => {
     return (
         <section>     
             <Launch overlayClass={overlayClass}/>
-            <Builder show={builderShow} rows={rows} mode={mode} prompt={prompt} templates={templates} />
+            {builderShow ? <Builder rows={rows} mode={mode} prompt={prompt} templates={templates} /> : <div></div>}
         </section>
     );
 }
