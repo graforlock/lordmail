@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {LOCALHOST, RENDER_PATH, VALID_MAIL} from '../../constants/index';
-// One step, instead of two??
+
 import render from '../actions/render-template';
 import email from '../actions/send-email';
 
