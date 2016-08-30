@@ -1,4 +1,4 @@
 module.exports = {
     mailer: require('./mailer'),
-    premailer: require('./premailer')
+    inlineCss: require('./inline-css')
 }

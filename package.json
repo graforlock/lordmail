@@ -13,9 +13,11 @@
   "author": "Maciej Sitko",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.14.0",
     "bluebird": "^3.4.0",
     "body-parser": "^1.15.1",
     "express": "^4.13.4",
+    "juice": "^2.0.0",
     "kefir": "^3.2.2",
     "nodemailer": "^2.4.1",
     "premailer-api": "^1.0.4",
@@ -24,8 +26,7 @@
     "sequelize": "^3.24.1",
     "shelljs": "^0.7.0",
     "socket.io": "^1.4.6",
-    "sqlite3": "^3.1.4",
-    "axios": "^0.14.0"
+    "sqlite3": "^3.1.4"
   },
   "devDependencies": {
     "babel-core": "^6.8.0",

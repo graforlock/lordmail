@@ -44,7 +44,7 @@ io.on('connection', function(socket) {
     socket.on('build_template', function(layout, filename, schema) {
         fs.writeFile(RENDER_PATH, layout, function(err) {
                 // Make it a higher order function
-                services.premailer(RENDER_PATH).then(output => {
+                services.inlineCss(RENDER_PATH).then(output => {
                     model.Templates.upsert(
                         {
                             name: filename,
@@ -66,7 +66,7 @@ io.on('connection', function(socket) {
 
     socket.on('send_email', function(address) {
         // Sends just the output (no writes)
-        services.premailer(RENDER_PATH).then(output => {
+        services.inlineCss(RENDER_PATH).then(output => {
             services.mailer.send(address, output);
             io.emit('email_sent', {});
         }).catch(error =>  console.warn(error));
