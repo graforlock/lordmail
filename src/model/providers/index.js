@@ -11,10 +11,11 @@ export const builderProvider = Singleton(function(State) {
     this.state = State.state;
     return {
         renderTemplate: ({ data, destination }) => {
-            let compiled = parseContents(data);
+            let compiled = parseContents(data),
+                { rows, mode } = data;
             socket.emit('build_template', buildTemplate(compiled),
-                destination, { rows: this.state.rows, mode: this.state.mode })
-            State.updateState({ data });
+                destination, { rows, mode });
+            State.updateState({ rows, mode });
 
         },
         sendTemplate: ({ data, address }) => {

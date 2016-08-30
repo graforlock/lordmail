@@ -19,8 +19,10 @@ class Builder extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            //rows and mode should be in state container 
             rows: props.rows,
             mode: props.mode,
+            // 
             templates: props.templates,
             editing: false,
      	    styleContent: "",
@@ -141,8 +143,8 @@ class Builder extends Component {
         }
     }
     render() {
-        let rows = this.state.rows.map( (row, index) => {
-                if(index < this.state.rows.length) {
+        let rows = this.props.rows.map( (row, index) => {
+                if(index < this.props.rows.length) {
                     return  <Row index={index} key={index} row={row} onChange={this.onChange.bind(this)}/>
                 } else {
                     return  <hr/>
