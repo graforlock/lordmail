@@ -1,4 +1,5 @@
 import React from 'react';
+import Toggle from './toggle';
 
 const ModeBlock = ({mode, activeMode}) => (
     <section>

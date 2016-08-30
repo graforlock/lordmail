@@ -1,6 +1,5 @@
 import { Singleton } from '../../utils/decorators';
 import { updateState } from '../../utils/index';
-import { Observer } from '../../utils/observer';
 import { buildTemplate } from '../../utils/template';
 import parseContents from '../../utils/parse-contents';
 import io from 'socket.io-client';

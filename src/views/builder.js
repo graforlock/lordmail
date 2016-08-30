@@ -8,9 +8,9 @@ import io from 'socket.io-client';
 
 import AddRow from './components/add-row';
 import ButtonBlock from './components/button-block';
+import Caption from './components/caption';
 import ModeBlock from './components/mode-block';
 import Row from './components/row';
-import Toggle from './components/toggle';
 import TextEditor from './components/texteditor';
 import TemplateList from './components/template-list';
 
@@ -122,6 +122,7 @@ class Builder extends Component {
         this.socket.emit('save_styles',this.state.styleContents);
     }
     renderTemplate = () => {
+        let templateName = this.props.prompt || new Date().toDateString();
         render.renderTemplate({data: {rows: this.state.rows, mode: this.state.mode}, destination: templateName})
     }
     editStyles = () => {
@@ -149,7 +150,7 @@ class Builder extends Component {
 
         let templates = this.props.templates ? this.props.templates : [],
             templateName = this.props.prompt || new Date().toDateString();
-
+            
         return (
             <section className={`launch ${show}`}>
                 <p id='data' style={{position : 'fixed', top: 0, left: '50%', zIndex: 1000000}}></p>

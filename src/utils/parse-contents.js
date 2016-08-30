@@ -1,19 +1,20 @@
 import partials from '../layout/partials/index'; 
 import { template } from './template';
 import { compose, join, map, strconcat as bundle } from './index';
-import contentTypes from '../layout/types/index'; // This would be in SQLite
+import contentTypes from '../layout/types/index'; //-> This would be in SQLite (!!!)
 
 export default ({rows,mode}) => {
-  // Destructuring the partials  
+  //-> Destructuring the partials  
   let {row, menu, social, button, spacer} = partials;
   
-  // Build and send the template to render
-  const createRows = compose(join, map(row)); //-->  Functional composition: Template each row (functor is partially applied)
+  //-> Build and send the template to render
+  const createRows = compose(join, map(row)); 
+
   let precompiled = bundle(
-      menu(mode), // top section
-      createRows(rows), // content section
-      social, // bottom social section
-      button(mode) // bottom button section
+      menu(mode), //-> Top (nav) section
+      createRows(rows), //-> Content (row) section
+      social, //-> Bottom social section
+      button(mode) //-> Bottom button section
     );
     
   return template(precompiled, contentTypes);
