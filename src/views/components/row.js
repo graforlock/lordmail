@@ -1,6 +1,5 @@
 import React from 'react';
 
-
 const Row = ({index, row, onChange}) => {
  return (
      <div key={index}>

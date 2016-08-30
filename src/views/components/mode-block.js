@@ -15,6 +15,12 @@ const ModeBlock = ({mode, activeMode}) => (
                             mode="menu"/>
             </h5>
         </div>
+        <div>
+            <h5>weekly<Toggle active={mode} 
+                            onClick={activeMode} 
+                            mode="weekly"/>
+            </h5>
+        </div>
         <hr/>
     </section>
 );
