@@ -1,11 +1,17 @@
 import React, {Component} from 'react';
 import {LOCALHOST, RENDER_PATH, VALID_MAIL} from '../../constants/index';
-import Toggle from './components/toggle';
-import TextEditor from './components/texteditor';
-import Row from './components/row';
+// One step, instead of two??
 import render from '../actions/render-template';
 import email from '../actions/send-email';
+
 import io from 'socket.io-client';
+
+import AddRow from './components/add-row';
+import ButtonBlock from './components/button-block';
+import ModeBlock from './components/mode-block';
+import Row from './components/row';
+import Toggle from './components/toggle';
+import TextEditor from './components/texteditor';
 import TemplateList from './components/template-list';
 
 
@@ -20,26 +26,7 @@ class Builder extends Component {
      	    styleContent: ""
         }
     }
-    addRow() {
-        let rows = this.state.rows;
-        rows.push({});
-        this.setState({rows});
-    }
-    activeMode(mode) {
-        let _modeState = this.state.mode;
-        switch(mode) {
-            case 'trans':
-                _modeState.trans = !_modeState[mode];
-                break;
-            case'menu' :
-                _modeState.menu = !_modeState[mode];
-                break;
-            case 'weekly': 
-                _modeState.weekly= !_modeState[mode];
-                break;
-        }
-        this.setState({mode: _modeState});
-    }
+    //-> 1). Lifecycle methods :
     componentDidMount() {
         this.socket = io.connect(LOCALHOST);
         this.socket.on('created_template', function(res) {
@@ -61,6 +48,7 @@ class Builder extends Component {
             this.setState({rows, mode});
         }
     }
+    //-> 2). Unbound parent methods :
     dragEnd(event) {
         this.dragging = false;
     }
@@ -106,11 +94,35 @@ class Builder extends Component {
         }
 	this.setState({styleContents: currentValue});
     }
+    //-> 3). Bound parent methods :
+    addRow = () => {
+        let rows = this.state.rows;
+        rows.push({});
+        this.setState({rows});
+    }
+    activeMode = (mode) => {
+        let _modeState = this.state.mode;
+        switch(mode) {
+            case 'trans':
+                _modeState.trans = !_modeState[mode];
+                break;
+            case'menu' :
+                _modeState.menu = !_modeState[mode];
+                break;
+            case 'weekly': 
+                _modeState.weekly= !_modeState[mode];
+                break;
+        }
+        this.setState({mode: _modeState});
+    }
     onTemplateClick = (name) => {
         this.socket.emit('change_template', name);
     }
-    saveStyles() {
+    saveStyles = () => {
         this.socket.emit('save_styles',this.state.styleContents);
+    }
+    renderTemplate = () => {
+        render.renderTemplate({data: {rows: this.state.rows, mode: this.state.mode}, destination: templateName})
     }
     editStyles = () => {
         let editing = this.state.editing;
@@ -128,8 +140,12 @@ class Builder extends Component {
     render() {
         let show = `${this.props.show}`,
             rows = this.state.rows.map( (row, index) => {
-           return  <Row index={index} key={index} row={row} onChange={this.onChange.bind(this)}/>
-        });
+                if(index < this.state.rows.length) {
+                    return  <Row index={index} key={index} row={row} onChange={this.onChange.bind(this)}/>
+                } else {
+                    return  <hr/>
+                }
+            });
 
         let templates = this.props.templates ? this.props.templates : [],
             templateName = this.props.prompt || new Date().toDateString();
@@ -139,23 +155,17 @@ class Builder extends Component {
                 <p id='data' style={{position : 'fixed', top: 0, left: '50%', zIndex: 1000000}}></p>
                 <iframe width="600" height="1000" src={RENDER_PATH}></iframe>
                 <aside onMouseDown={this.dragStart.bind(this)} className="sidebar">
-                    <div><h5>Template: {templateName}</h5></div>
-                    <hr/>
+                    <Caption name={templateName} />
                     <section id="drag-handle" className="drag-handle"></section>
-                    <div ><h5>transactional<Toggle active={this.state.mode} onClick={this.activeMode.bind(this)} mode="trans"/></h5></div>
-                    <div ><h5>menu<Toggle active={this.state.mode} onClick={this.activeMode.bind(this)} mode="menu"/></h5></div>
-                    <hr/>
-                    <div onClick={this.addRow.bind(this)}><h5 className="add-row">add row</h5></div>
+                    <ModeBlock mode={this.state.mode} activeMode={this.activeMode} />
+                    <AddRow addRow={this.addRow} />
                     { rows }
-                    <hr/>
-                    <div >
-                        <button onClick={() => render.renderTemplate({data: {rows: this.state.rows, mode: this.state.mode}, destination: templateName})} className="render-button">render</button>
-                        <button onClick={this.sendEmail} className="render-button">send email</button>
-                        <button onClick={this.editStyles} className="render-button">edit styles</button>
-                        <button onClick={this.saveStyles.bind(this)} className="render-button">save styles</button>
-                    </div>
-                    <TemplateList  templates={this.props.templates} onTemplateClick={this.onTemplateClick} />
-                    <TextEditor editing={this.state.editing} onStyleEdit={this.onStyleEdit.bind(this)} />
+                    <ButtonBlock saveStyles={this.saveStyles} renderTemplate={this.renderTemplate} 
+                                 sendEmail={this.sendEmail} editStyles={this.editStyles} />
+                    <TemplateList  templates={this.props.templates} 
+                                   onTemplateClick={this.onTemplateClick} />
+                    <TextEditor editing={this.state.editing} 
+                                onStyleEdit={this.onStyleEdit.bind(this)} />
                 </aside>
             </section>      
         );
