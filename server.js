@@ -3,7 +3,7 @@ const express = require('express'),
     bodyParser = require('body-parser'),
     app = express(),
     fs = require('fs'),
-    services = require('./services'),
+    lib = require('./lib'),
     RENDER_PATH = require('./constants/index').RENDER_PATH,
     TEMPLATE_PATH = require('./constants/index').TEMPLATE_PATH;
 
@@ -44,7 +44,7 @@ io.on('connection', function(socket) {
     socket.on('build_template', function(layout, filename, schema) {
         fs.writeFile(RENDER_PATH, layout, function(err) {
                 // Make it a higher order function
-                services.inlineCss(RENDER_PATH).then(output => {
+                lib.inlineCss(RENDER_PATH).then(output => {
                     model.Templates.upsert(
                         {
                             name: filename,
@@ -66,8 +66,8 @@ io.on('connection', function(socket) {
 
     socket.on('send_email', function(address) {
         // Sends just the output (no writes)
-        services.inlineCss(RENDER_PATH).then(output => {
-            services.mailer.send(address, output);
+        lib.inlineCss(RENDER_PATH).then(output => {
+            lib.mailer.send(address, output);
             io.emit('email_sent', {});
         }).catch(error =>  console.warn(error));
    });
