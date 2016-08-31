@@ -134,9 +134,10 @@ class Builder extends Component {
         }
     }
     render() {
+
         let rows = this.props.rows.map( (row, index) => {
                 if(index < this.props.rows.length) {
-                    return  <Row index={index} key={index} row={row} onChange={this.onChange.bind(this)}/>
+                    return  <Row index={index} key={index} row={row} rowSchemas={this.props.rowSchemas} onChange={this.onChange.bind(this)}/>
                 } else {
                     return  <hr/>
                 }

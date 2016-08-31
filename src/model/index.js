@@ -12,6 +12,7 @@ const State = new stateProvider({
       weekly: false
     },
     templates: [],
+    rowSchemas: [],
     launched: false,
     prompt: ''
 });
@@ -27,6 +28,7 @@ const model = Kefir.pool(),
       App = appProvider.getInstance(State);
 
 //-> WebSockets listeners :
+App.onFetchedSchemas();
 Builder.onTemplateList();
 Builder.onChangedTemplate();
 

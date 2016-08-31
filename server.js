@@ -76,5 +76,12 @@ db.sync().then(function() {
     return model.DefaultCss.findOne().then(function(rec) {
         var css = fs.createWriteStream('./css/default.css');
         css.write(rec.css);
+    }).then(function() {
+        model.Rows.findAll().then(function(rows) {
+            io.on('connection', function(socket) {
+                console.log('emitting')
+                io.emit('row_schemas', rows);
+            })
+        });
     });
 });

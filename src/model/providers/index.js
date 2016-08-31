@@ -1,7 +1,6 @@
 import { Singleton } from '../../utils/decorators';
 import { updateState } from '../../utils/index';
-import { buildTemplate } from '../../utils/template';
-import parseContents from '../../utils/parse-contents';
+import Parser from '../../utils/parse-contents'; //-> Parser should be together with build_template under Template class
 import io from 'socket.io-client';
 import { LOCALHOST } from '../../../constants/index';
 
@@ -11,16 +10,18 @@ export const builderProvider = Singleton(function(State) {
     this.state = State.state;
     return {
         renderTemplate: ({ data, destination }) => {
-            let compiled = parseContents(data),
-                { rows, mode } = data;
-            socket.emit('build_template', buildTemplate(compiled),
+            const TemplateParser = new Parser(State.state.rowSchemas),
+                  compiled = TemplateParser.parse(data),
+                  { rows, mode } = data;
+            socket.emit('build_template', Parser.buildTemplate(compiled),
                 destination, { rows, mode });
             State.updateState({ rows, mode });
 
         },
         sendTemplate: ({ data, address }) => {
-            let compiled = parseContents(data);
-            socket.emit('send_email', buildTemplate(compiled),
+            const TemplateParser = new Parser(State.state.rowSchemas),
+                  compiled = TemplateParser.parse(data);
+            socket.emit('send_email', Parser.buildTemplate(compiled),
                 address)
             State.updateState({ data });
 
@@ -52,6 +53,11 @@ export const appProvider = Singleton(function(State) {
         },
         getPromptvalue: (prompt) => {
             State.updateState({ prompt })
+        },
+        onFetchedSchemas: () => {
+            socket.on('row_schemas', schemas => {
+                State.updateState({rowSchemas: schemas})
+            })
         }
     }
 });
