@@ -22,7 +22,8 @@ class Builder extends Component {
             templates: props.templates,
             editing: false,
      	    styleContent: "",
-            name: props.prompt
+            name: props.prompt,
+            rendered: false
         }
     }
     //-> 1). Lifecycle methods :
@@ -124,6 +125,8 @@ class Builder extends Component {
         this.socket.emit('save_styles',this.state.styleContents);
     }
     renderTemplate = () => {
+        if(!this.state.rendered) this.setState({rendered: true});
+
         let templateName = this.state.name || new Date().toDateString();
         render.renderTemplate({data: {rows: this.props.rows, mode: this.props.mode}, destination: templateName})
     }
@@ -156,7 +159,7 @@ class Builder extends Component {
         return (
             <section className={`launch true`}>
                 <p id='data' style={{position : 'fixed', top: 0, left: '50%', zIndex: 1000000}}></p>
-                <iframe width="600" height="1000" src={RENDER_PATH}></iframe>
+                <iframe width="600" height="1000" src={this.state.rendered ? RENDER_PATH : ''}></iframe>
                 <aside onMouseDown={this.dragStart.bind(this)} className="sidebar">
                     <Caption name={templateName} />
                     <section id="drag-handle" className="drag-handle"></section>
