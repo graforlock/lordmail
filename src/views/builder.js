@@ -94,6 +94,13 @@ class Builder extends Component {
         rows.push({});
         render.updateSchema({mode: this.props.mode, rows});
     }
+    removeRow = () => {
+        if(!this.props.rows.length) return;
+        
+        let rows = this.props.rows;
+            rows.splice(rows.length - 1, 1);
+        render.updateSchema({mode: this.props.mode, rows});
+    }
     activeMode = (mode) => {
         let _modeState = this.props.mode;
         switch(mode) {
@@ -154,7 +161,7 @@ class Builder extends Component {
                     <Caption name={templateName} />
                     <section id="drag-handle" className="drag-handle"></section>
                     <ModeBlock mode={this.props.mode} activeMode={this.activeMode} />
-                    <AddRow addRow={this.addRow} />
+                    <AddRow addRow={this.addRow} removeRow={this.removeRow} />
                     { rows }
                     <ButtonBlock saveStyles={this.saveStyles} renderTemplate={this.renderTemplate} 
                                  sendEmail={this.sendEmail} editStyles={this.editStyles} />

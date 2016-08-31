@@ -185,7 +185,7 @@ body {
     cursor: ew-resize;
 }
 
-.add-row:after {
+.add-row:after, .remove-row:after {
     content: "+";
     border-radius: 100%;
     border: 1px solid gainsboro;
@@ -195,6 +195,10 @@ body {
     font-size: 14px;
     float: right;
     cursor: pointer;
+}
+
+.remove-row:after {
+    content: "-";
 }
 
 .launch.true .render-button {
