@@ -2,7 +2,7 @@ import partials from '../layout/partials/index';
 import { compose, join, map, strconcat as bundle } from './index';
 import layout from '../layout/base-layout';
 
-class Parser {
+class Template {
   constructor(rowSchemas){
     this.rowSchemas = {};
     for(let i = 0; i < rowSchemas.length; i++) {
@@ -52,4 +52,4 @@ class Parser {
   }
 }
 
-export default Parser;
+export default Template;

@@ -1,6 +1,6 @@
 import { Singleton } from '../../utils/decorators';
 import { updateState } from '../../utils/index';
-import Parser from '../../utils/parse-contents'; //-> Parser should be together with build_template under Template class
+import Template from '../../utils/template'; 
 import io from 'socket.io-client';
 import { LOCALHOST } from '../../../constants/index';
 
@@ -10,18 +10,18 @@ export const builderProvider = Singleton(function(State) {
     this.state = State.state;
     return {
         renderTemplate: ({ data, destination }) => {
-            const TemplateParser = new Parser(State.state.rowSchemas),
+            const TemplateParser = new Template(State.state.rowSchemas),
                   compiled = TemplateParser.parse(data),
                   { rows, mode } = data;
-            socket.emit('build_template', Parser.buildTemplate(compiled),
+            socket.emit('build_template', Template.buildTemplate(compiled),
                 destination, { rows, mode });
             State.updateState({ rows, mode });
 
         },
         sendTemplate: ({ data, address }) => {
-            const TemplateParser = new Parser(State.state.rowSchemas),
+            const TemplateParser = new Template(State.state.rowSchemas),
                   compiled = TemplateParser.parse(data);
-            socket.emit('send_email', Parser.buildTemplate(compiled),
+            socket.emit('send_email', Template.buildTemplate(compiled),
                 address)
             State.updateState({ data });
 
