@@ -1,12 +1,6 @@
 import Kefir from 'kefir';
 import axios from 'axios';
 
-/*
- Action Pool.
- -------------
- Stores the name of the current action, that is being fed to the model.
-*/
-
 export const pool = Kefir.pool();
 
 export const plug = (intent) => {
