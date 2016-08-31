@@ -1,12 +1,9 @@
-import {repeat} from '../../utils/template';
-
 export default `
           <td class="two-column">
                         <!--[if (gte mso 9)|(IE)]>
                         <table width="100%">
                         <tr>
-                        ${repeat(2).html(
-                                `<td width="50%" valign="top">
+                                <td width="50%" valign="top">
                                 <![endif]-->
                                 <div class="column">
                                 <table width="100%">
@@ -29,8 +26,7 @@ export default `
                                 </table>
                                 </div>
                                 <!--[if (gte mso 9)|(IE)]>
-                                </td>`
-                        )}
+                                </td>
                         </tr>
                         </table>
                         <![endif]-->

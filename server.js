@@ -11,8 +11,6 @@ const db = require('./sqlite').db,
       model = require('./sqlite').model;
 let templates;
 
-require('shelljs/global');
-
 app.use('/', express.static('./'));
 
 app.use(bodyParser.json());

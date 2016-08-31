@@ -6,7 +6,10 @@ const Rows = function(connection) {
                     type: Sequelize.STRING,
                     primaryKey: true
                 },
-                description: Sequelize.STRING,
+                description: {
+                    type: Sequelize.STRING,
+                    defaultValue: 'No description'
+                },
                 content: Sequelize.TEXT,
                 type: {
                     type: Sequelize.STRING,
