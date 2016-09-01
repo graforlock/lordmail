@@ -181,7 +181,7 @@ class Builder extends Component {
                                 editStyles={this.editStyles}/>
                 </aside>
                 <Cog editSettings={this.editSettings} />
-                <Settings settingsVisible={this.state.settingsVisible}/>
+                <Settings editSettings={this.editSettings} settingsVisible={this.state.settingsVisible}/>
             </section>      
         );
         

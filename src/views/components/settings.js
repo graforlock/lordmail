@@ -8,12 +8,15 @@ class Settings extends Component {
         }
     }
     render() {
-        if(!this.props.settingsVisible) return <div></div>;
+        let className = this.props.settingsVisible ? 'visible'  : '';
 
         return(
-            <div id="settings">
-                <textarea defaultValue="Add a new row to the database..."></textarea>
-                <input type="text" placeholder="Row type..." />
+            <div id="settings" className={className}>
+                <label htmlFor="row-name">New Row name: </label>
+                <input type="text" placeholder="Row type..." id="row-name" name="row-name" />
+                <label htmlFor="row-content">Row Content: </label>
+                <textarea rows="10" cols="100" defaultValue="Add a new row to the database..." id="row-content" name="row-content"></textarea>
+                <button className="render-button" onClick={this.props.editSettings}>Close</button>
             </div>
         )
     }

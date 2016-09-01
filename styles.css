@@ -208,6 +208,7 @@ body {
 
 .render-button {
     width: 45%;
+    max-width: 200px;
     opacity: 0;
     font-family: Monaco, Inconsolata, Menlo, Courier; 
     font-size: 14px;
@@ -359,12 +360,28 @@ hr {
 }
 
 #settings {
+    opacity: 0;
     background: white;
+    background-image: url('img/background.png');
+    background-size: cover;
     position: fixed; 
     z-index: 2000000;
     height: 100%;
     width: 100%;
-    left: 0;
+    left: 100%;
     top: 0;
+    padding: 5%;
+    transition: all .75s ease-in;
 }
 
+#settings.visible {
+    opacity: 1;
+    left: 0;
+    transition: all .75s ease-in;
+}
+
+#settings textarea, #settings input, #settings label {
+    color: gray;
+    margin: 10px;
+    display: block;
+}
