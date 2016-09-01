@@ -297,4 +297,74 @@ hr {
 
 }
 
+#cog {
+  height: 10px;
+  width: 10px;
+  display: inline-block;
+  border: 8px solid gainsboro;
+  border-radius: 100%;
+  background: white;
+  position: fixed;
+  left: 10px;
+  bottom: 10px;
+  cursor: pointer;
+}
+
+#cog p {
+  position: absolute;
+  left: 30px;
+  top: -20px;
+  color: gray;
+  
+}
+
+.line {
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: auto;
+  height: 32.5px;
+  width: 10px;
+  border-radius: 3px;
+  background: gainsboro;
+}
+
+.line:nth-child(2) {
+ transform: rotate(45deg);
+}
+
+.line:nth-child(3) {
+  transform: rotate(90deg);
+}
+
+.line:nth-child(4) {
+  transform: rotate(-45deg);
+}
+
+.circle {
+  position: absolute;
+  border-radius: 100%;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  background: white;
+  height: 100%;
+  width: 100%;
+  
+}
+
+#settings {
+    background: white;
+    position: fixed; 
+    z-index: 2000000;
+    height: 100%;
+    width: 100%;
+    left: 0;
+    top: 0;
+}
 

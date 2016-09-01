@@ -9,8 +9,10 @@ import io from 'socket.io-client';
 import AddRow from './components/add-row';
 import ButtonBlock from './components/button-block';
 import Caption from './components/caption';
+import Cog from './components/cog';
 import ModeBlock from './components/mode-block';
 import Row from './components/row';
+import Settings from './components/settings';
 import TextEditor from './components/texteditor';
 import TemplateList from './components/template-list';
 
@@ -23,7 +25,8 @@ class Builder extends Component {
             editing: false,
      	    styleContent: "",
             name: props.prompt,
-            rendered: false
+            rendered: false,
+            settingsVisible: false
         }
     }
     //-> 1). Lifecycle methods :
@@ -134,6 +137,9 @@ class Builder extends Component {
         let editing = this.state.editing;
         this.setState({editing: !editing});    
     }
+    editSettings = () => {  
+        this.setState({settingsVisible: !this.state.settingsVisible})
+    }
     sendEmail = (event) => {
         let address = prompt('Please enter your valid email address:'),
             regex = VALID_MAIL;
@@ -174,6 +180,8 @@ class Builder extends Component {
                                 onStyleEdit={this.onStyleEdit.bind(this)} 
                                 editStyles={this.editStyles}/>
                 </aside>
+                <Cog editSettings={this.editSettings} />
+                <Settings settingsVisible={this.state.settingsVisible}/>
             </section>      
         );
         

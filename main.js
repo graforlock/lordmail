@@ -11,7 +11,7 @@ function createWindow() {
   win = new BrowserWindow({width: 900, height: 700, useContentSize: true});
   win.loadURL(LOCALHOST);
 
-  // win.webContents.openDevTools();
+  win.webContents.openDevTools();
   win.on('closed', () => {
     win = null;
   });
