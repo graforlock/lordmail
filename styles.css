@@ -1,6 +1,10 @@
 body {
     font-family: Monaco, Inconsolata, Menlo, Courier;    
 }
+* {
+   -webkit-user-select: none;
+   user-select: none;
+}
 
 *:focus {
     outline: none;
@@ -209,9 +213,10 @@ body {
 
 .back-to-main {
     position: fixed;
-    top: 10px;
-    left: 10px;
+    top: 0px;
+    left: 0px;
     z-index: 10;
+    background: rgba(255,255,255,0.7) !important;
 }
 
 .render-button {
@@ -259,7 +264,7 @@ iframe {
     box-sizing: border-box;
     min-height: 900px;
     max-width: 977px;
-    padding: 10px;
+    padding: 0;
     margin: 0;
     pointer-events: none;
     border: none;
@@ -274,9 +279,7 @@ hr {
 
 .sidebar .template-list {
     margin: 0 25px;
-    max-height: 250px;
     width: 100%;
-    overflow-y: scroll;
 }
 
 .sidebar .template-list h5.template-item {
