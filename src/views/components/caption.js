@@ -1,10 +1,10 @@
 import React from 'react';
 
 const Caption = ({name}) => (
-    <div>   
+    <section>   
         <h5>Template: {name}</h5>
     <hr/>
-    </div>
+    </section>
 );
 
 export default Caption;

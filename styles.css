@@ -99,7 +99,11 @@ body {
 
 }
 
-.launch .sidebar div h5 {
+.sidebar > section{
+    width: 300px;
+}
+
+.launch .sidebar section h5 {
     margin: 20px 35px 20px 35px;
     opacity: 0;
     text-align: left;
@@ -108,7 +112,7 @@ body {
     min-width: 225px;
 }
 
-.launch .sidebar div h5 span {
+.launch .sidebar section h5 span {
     border: 1px solid gainsboro;
     background: gainsboro;
     border-radius: 10px;
@@ -144,15 +148,15 @@ body {
     margin-bottom: 0;
 }
 
-.launch .sidebar div h5 select {
+.launch .sidebar section h5 select {
     float: right;
     border-radius: 0;
     border: 1px solid gainsboro;
     color: gray;
 }
 
-.launch .sidebar div h5 span:before,
-.launch .sidebar div h5 span.active:before {
+.launch .sidebar section h5 span:before,
+.launch .sidebar section h5 span.active:before {
     content: "No";
     font-size: 8px;
     color: gray;
@@ -169,13 +173,13 @@ body {
 
 }
 
-.launch .sidebar div h5 span.active:before {
+.launch .sidebar section h5 span.active:before {
     content: "Yes";
     float: right;
 }
 
 
-.launch.true div h5 {
+.launch.true section h5 {
     opacity: 1;
     transition: opacity .75s ease-in;
     transition-delay: 2s;

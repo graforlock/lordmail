@@ -53,7 +53,7 @@ class Builder extends Component {
     }
     dragMove(event) {
         if(this.dragging === true) {
-            this.target.currentTarget.style.left = (event.pageX ) + 'px';
+            this.target.currentTarget.style.width = (window.innerWidth - event.pageX ) + 'px';
             document.querySelector('iframe').width = (event.pageX ) + 'px';
             this.adjustFrameHeight();
         }
@@ -166,10 +166,12 @@ class Builder extends Component {
         return (
             <section className={`launch true`}>
                 <p id='data' style={{position : 'fixed', top: 0, left: '50%', zIndex: 1000000}}></p>
-                <iframe width="600" height="900" scrolling="no" src={this.state.rendered ? RENDER_PATH : ''}></iframe>
+                <div style={{height: 700, overflow: 'scroll', position: 'relative'}}>
+                    <iframe width="600" height="700" scrolling="no" src={this.state.rendered ? RENDER_PATH : ''}></iframe>
+                </div>
                 <aside onMouseDown={this.dragStart.bind(this)} className="sidebar">
                     <Caption name={templateName} />
-                    <section id="drag-handle" className="drag-handle"></section>
+                    <div id="drag-handle" className="drag-handle"></div>
                     <ModeBlock mode={this.props.mode} activeMode={this.activeMode} />
                     <AddRow addRow={this.addRow} removeRow={this.removeRow} />
                     { rows }

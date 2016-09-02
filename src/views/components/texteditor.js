@@ -19,13 +19,13 @@ class TextEditor extends Component {
     render() {
     let editingClass = this.props.editing ? 'editing' : '';
         return (
-            <div className={editingClass}>
+            <section className={editingClass}>
                 <hr className="no-bottom-margin"/>
                 
                 <button className={`render-button close-styles ${editingClass}`} onClick={this.props.editStyles}>close</button>
                 <textarea id="text-editor" defaultValue="/* Custom Styles */" className="text-editor" >
                 </textarea>
-            </div>
+            </section>
         )    
     }
 }
