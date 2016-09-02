@@ -240,6 +240,25 @@ body {
     transition: opacity .75s ease-in;
     transition-delay: 2s;
 }
+.save-button {
+    transition: all .25s ease-in;
+}
+.save-button:hover {
+    transition: all .25s ease-in;
+    background: white;
+}
+
+.close-settings {
+    opacity: 0.5;
+    border-color: lightcoral;
+    color: lightcoral;
+    transition: all .5s ease-in;
+}
+
+.close-settings:hover {
+    opacity: 1;
+    transition: all .5s ease-in;
+}
 
 .close-styles {
     position: fixed;

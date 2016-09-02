@@ -16,7 +16,8 @@ class Settings extends Component {
                 <input type="text" placeholder="Row type..." id="row-name" name="row-name" />
                 <label htmlFor="row-content">Row Content: </label>
                 <textarea rows="10" cols="100" defaultValue="Add a new row to the database..." id="row-content" name="row-content"></textarea>
-                <button className="render-button" onClick={this.props.editSettings}>Close</button>
+                <button className="render-button close-settings" onClick={this.props.editSettings}>Don't save</button>
+                <button className="render-button save-button" onClick={this.props.editSettings}>Save</button>
             </div>
         )
     }
