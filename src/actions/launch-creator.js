@@ -14,5 +14,11 @@ export default  {
       actions.GET_PROMPT,
       payload(event)
     )
+  },
+  backToMain: function(event) {
+    registerIntent(
+      actions.BACK_TO_MAIN,
+      payload(event)
+    )
   }
 } 

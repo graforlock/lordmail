@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+// Actions for saving new stuff to SQLite
 
 class Settings extends Component {
     constructor(props) {
@@ -9,7 +10,6 @@ class Settings extends Component {
     }
     render() {
         let className = this.props.settingsVisible ? 'visible'  : '';
-
         return(
             <div id="settings" className={className}>
                 <label htmlFor="row-name">New Row name: </label>

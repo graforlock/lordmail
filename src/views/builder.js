@@ -7,6 +7,7 @@ import email from '../actions/send-email';
 import io from 'socket.io-client';
 
 import AddRow from './components/add-row';
+import BackToMain from './components/back-to-main';
 import ButtonBlock from './components/button-block';
 import Caption from './components/caption';
 import Cog from './components/cog';
@@ -182,6 +183,7 @@ class Builder extends Component {
                 </aside>
                 <Cog editSettings={this.editSettings} />
                 <Settings editSettings={this.editSettings} settingsVisible={this.state.settingsVisible}/>
+                <BackToMain />
             </section>      
         );
         

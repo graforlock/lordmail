@@ -34,6 +34,9 @@ Builder.onChangedTemplate();
 
 pool.onValue(x => {
   switch (x.type) {
+    case actions.BACK_TO_MAIN:
+        App.backToMain(x.payload);
+        break;
     case actions.LAUNCH_CREATOR:
         App.launchCreator();
         break;

@@ -7,6 +7,8 @@ export default mirror({
   'Launches the app.',
   RENDER_TEMPLATE: 
   'Renders the template according to the current builder schema model.',
+  BACK_TO_MAIN: 
+  'Resets all the state and goes back to main app menu prompt.',
   UPDATE_SCHEMA: 
   'Updates rows and mode.',
   SEND_EMAIL:

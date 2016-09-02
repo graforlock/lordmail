@@ -48,6 +48,9 @@ export const builderProvider = Singleton(function(State) {
 export const appProvider = Singleton(function(State) {
     this.state = State.state;
     return {
+        backToMain: () => {
+            State.resetState();
+        },
         launchCreator: () => {
             State.updateState({ launched: !this.state.launched });
         },
@@ -65,6 +68,7 @@ export const appProvider = Singleton(function(State) {
 export const stateProvider = function(state) {
     //-> stateProvider is a simplified Subject of Observer :
    this.state = state;
+   this.initState = state;
    this.subscribers = [];
 }
 
@@ -86,4 +90,8 @@ stateProvider.prototype.notify = function(newState) {
 stateProvider.prototype.subscribe = function(subscriber) {
     //-> Observer(s) subscription :
     this.subscribers.push(subscriber);
+}
+
+stateProvider.prototype.resetState = function() {
+    this.updateState(this.initState);
 }

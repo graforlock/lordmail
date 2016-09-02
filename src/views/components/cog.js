@@ -9,6 +9,6 @@ const Cog = ({editSettings}) => (
         <div className="line"></div>
         <div className="circle"></div>
     </div>
-)
+);
 
 export default Cog;
