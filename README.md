@@ -1,4 +1,5 @@
 ## Mailord
+[![bitHound Overall Score](https://www.bithound.io/github/graforlock/mailord/badges/score.svg)](https://www.bithound.io/github/graforlock/mailord) [![bitHound Code](https://www.bithound.io/github/graforlock/mailord/badges/code.svg)](https://www.bithound.io/github/graforlock/mailord) [![bitHound Dependencies](https://www.bithound.io/github/graforlock/mailord/badges/dependencies.svg)](https://www.bithound.io/github/graforlock/mailord/master/dependencies/npm) [![bitHound Dev Dependencies](https://www.bithound.io/github/graforlock/mailord/badges/devDependencies.svg)](https://www.bithound.io/github/graforlock/mailord/master/dependencies/npm)
 
 A builder &  the way to deal with responsive email frustration. Its an abstraction layer for creating responsive email templates.
 
