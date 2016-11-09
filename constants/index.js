@@ -1,6 +1,7 @@
 exports.MC_API_KEY = '';
 
 exports.EMAIL_CREDENTIALS = {
+    /* Credentials are for the dummy fake/testing account. */
     user: '',
     passwd: ''
     
